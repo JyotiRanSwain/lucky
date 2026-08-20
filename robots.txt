@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /collector/
+Disallow: /technician/
+Disallow: /pages/profile.html
+Disallow: /pages/bookings.html
+Disallow: /pages/reports.html
+Disallow: /pages/cart.html
+Disallow: /apps-script/
+
+Sitemap: https://luckydiagnostics.com/sitemap.xml
