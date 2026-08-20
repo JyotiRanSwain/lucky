@@ -162,10 +162,22 @@ function initAnimations() {
 /* ---------- Search ---------- */
 function handleSearch(e) {
     e.preventDefault();
+
     const input = document.getElementById('heroSearchInput');
-    const q = (input.value || '').trim();
-    if (q) window.location.href = `${R}tests/?q=${encodeURIComponent(q)}`;
-    else input.focus();
+
+    if (!input) return false;
+
+    const q = input.value.trim();
+
+    if (q) {
+        const R = (typeof siteRoot === 'function')
+            ? siteRoot()
+            : '/';
+
+        window.location.href =
+            `${R}tests/?q=${encodeURIComponent(q)}`;
+    }
+
     return false;
 }
 window.handleSearch = handleSearch;

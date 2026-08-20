@@ -56,7 +56,7 @@
     const params = new URLSearchParams(location.search);
 
     const initialQuery =
-        (params.get('q') || '').trim();
+    (params.get('q') || '').trim();
 
     const initialCat =
         (params.get('category') || params.get('slug') || '').trim();

@@ -69,7 +69,7 @@ const API = {
     async getReports()    { return this.request('getReports'); },
     async getReportUrl(d) { return this.request('getReportUrl', d); },
     async getPrescriptions() { return this.request('getPrescriptions'); },
-    async uploadPrescription(d) { return this.request('uploadPrescription', d); },
+    async uploadprescription(d) { return this.request('uploadprescription', d); },
     async getFamily()     { return this.request('getFamily'); },
     async addFamily(d)    { return this.request('addFamily', d); },
     async validatePromo(d){ return this.request('validatePromo', d); }
