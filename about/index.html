@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>About Us — Lucky Diagnostics Bhubaneswar</title>
+<meta name="description" content="Lucky Diagnostics, Patia, Bhubaneswar — precise, trusted and timely diagnostic care with home sample collection.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/banner.css">
+<style>
+/* Hero Section */
+.about-hero {
+  padding: 48px 16px 36px;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(240, 249, 255, 0.9) 100%);
+  text-align: center;
+  border-bottom: 1px solid var(--border, #e2e8f0);
+}
+.about-hero .hero-tag {
+  display: inline-block;
+  background: rgba(14, 165, 233, 0.12);
+  color: var(--primary, #0ea5e9);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+.about-hero h1 { font-size: 28px; font-weight: 800; color: var(--text-1, #0f172a); margin-bottom: 12px; line-height: 1.25; }
+.about-hero p { color: var(--text-2, #475569); max-width: 620px; margin: 0 auto; font-size: 15px; line-height: 1.6; }
+
+/* Stats Bar */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 20px 16px;
+  max-width: 1000px;
+  margin: -24px auto 0;
+  position: relative;
+  z-index: 2;
+}
+.stat-card {
+  background: #ffffff;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: var(--radius-md, 12px);
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+.stat-card .num { font-size: 24px; font-weight: 800; color: var(--primary, #0ea5e9); margin-bottom: 2px; }
+.stat-card .label { font-size: 12px; color: var(--muted, #64748b); font-weight: 600; text-transform: uppercase; }
+
+/* Section Content Styling */
+.about-container { max-width: 1000px; margin: 0 auto; padding: 32px 16px; }
+.about-story {
+  background: #ffffff;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: var(--radius-md, 12px);
+  padding: 24px;
+  margin-bottom: 32px;
+}
+.about-story h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: var(--text-1, #0f172a); }
+.about-story p { font-size: 15px; line-height: 1.7; color: var(--text-2, #334155); margin-bottom: 12px; }
+.about-story p:last-child { margin-bottom: 0; }
+
+/* Values Grid */
+.values-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 16px; }
+.value-card {
+  background: #ffffff;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: var(--radius-md, 12px);
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.value-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+.value-card .vi {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #ffffff;
+}
+.value-card h4 { font-size: 16px; font-weight: 700; margin: 0 0 4px; color: var(--text-1, #0f172a); }
+.value-card p { font-size: 13px; color: var(--muted, #64748b); line-height: 1.5; margin: 0; }
+
+/* Process Steps */
+.process-section { margin-top: 40px; }
+.process-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 16px; }
+.process-step {
+  background: #ffffff;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: var(--radius-md, 12px);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.process-step .step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(14, 165, 233, 0.1);
+  color: var(--primary, #0ea5e9);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.process-step h5 { font-size: 15px; font-weight: 700; margin: 0 0 2px; }
+.process-step p { font-size: 13px; color: var(--muted, #64748b); margin: 0; }
+
+@media(min-width: 640px) {
+  .stats-grid { grid-template-columns: repeat(4, 1fr); }
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media(min-width: 1024px) {
+  .values-grid { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+<link rel="icon" type="image/png" href="../images/logo.png">
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header" id="siteHeader">
+    <div class="header-inner">
+        <a href="../" class="logo" aria-label="Lucky Diagnostics Home">
+            <img src="../images/logo.png" alt="Lucky Diagnostics logo" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo-word" aria-hidden="true">
+                <span class="l1">Lucky</span>
+                <span class="l2">Diagnostics</span>
+            </span>
+        </a>
+
+        <div class="loc-selector" id="locSelector">
+            <button class="loc-drop" id="locDropBtn" aria-haspopup="listbox" aria-expanded="false">
+                <i class="fa-solid fa-location-dot pin"></i>
+                <span id="locCurrent"><span class="loc-short">Patia</span><span class="loc-long">, Bhubaneswar</span></span>
+                <i class="fa-solid fa-chevron-down chev"></i>
+            </button>
+            <div class="loc-menu" id="locMenu" role="listbox" aria-label="Select location">
+                <button class="loc-option active" data-loc="Patia, Bhubaneswar">
+                    <i class="fa-solid fa-location-dot"></i> Patia, Bhubaneswar
+                </button>
+                <button class="loc-option" data-loc="Cuttack" data-soon="1">
+                    <i class="fa-solid fa-location-dot"></i> Cuttack <span class="soon">SOON</span>
+                </button>
+            </div>
+        </div>
+
+        <nav class="nav-desktop" aria-label="Primary">
+            <a href="../">Home</a>
+            <a href="../tests/">Tests</a>
+            <a href="../packages/">Packages</a>
+            <a href="../about/" class="active">About</a>
+            <a href="../contact/">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="tel:+919853716027" class="icon-btn" aria-label="Call us"><i class="fa-solid fa-phone"></i></a>
+            <a href="../cart/" class="icon-btn" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartBadge">0</span></a>
+            <button class="menu-toggle" id="menuBtn" aria-label="Open menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div>
+</header> 
+
+<!-- ========== MOBILE DRAWER ========== -->
+<nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <a href="../"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="../tests/"><i class="fa-solid fa-flask-vial"></i> Browse Tests</a>
+    <a href="../packages/"><i class="fa-solid fa-box-open"></i> Health Packages</a>
+    <a href="../tests/"><i class="fa-solid fa-house-medical"></i> Home Collection</a>
+    <a href="../uploadprescription/"><i class="fa-solid fa-prescription"></i> Upload Prescription</a>
+    <a href="../about/" class="active"><i class="fa-solid fa-circle-info"></i> About Us</a>
+    <a href="../contact/"><i class="fa-solid fa-envelope"></i> Contact</a>
+    <div class="drawer-actions">
+        <a href="tel:+919853716027" class="btn btn-secondary btn-block"><i class="fa-solid fa-phone"></i> Call +91 98537 16027</a>
+    </div>
+</nav>
+
+<!-- ========== MAIN CONTENT ========== -->
+<main>
+    <!-- HERO HEADER -->
+    <div class="about-hero">
+        <span class="hero-tag"><i class="fa-solid fa-shield-heart"></i> Precision &amp; Care</span>
+        <h1>Your Health, Our Top Priority</h1>
+        <p>Lucky Diagnostics brings reliable, affordable, and accurate diagnostic care to Patia, Bhubaneswar — combining modern clinical technology with doorstep convenience.</p>
+    </div>
+
+    <!-- STATS HIGHLIGHTS -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="num">150+</div>
+            <div class="label">Tests Available</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">100%</div>
+            <div class="label">NABL Standard Guidelines</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">&lt; 24h</div>
+            <div class="label">Report Delivery</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">5,000+</div>
+            <div class="label">Happy Patients</div>
+        </div>
+    </div>
+
+    <div class="about-container">
+        <!-- ABOUT STORY -->
+        <div class="about-story">
+            <h3>Who We Are</h3>
+            <p>Founded on a commitment to diagnostic excellence, <strong>Lucky Diagnostics</strong> serves the community of Patia and Bhubaneswar with high-precision blood testing, health screening packages, and seamless home sample collection.</p>
+            <p>We know that fast and accurate test results lead to timely treatments. That is why our laboratory protocol strictly adheres to standardized validation workflows, ensuring every report is accurate, reliable, and verified by certified technicians before reaching your physician.</p>
+        </div>
+
+        <!-- VALUES SECTION -->
+        <div class="section-head">
+            <span class="eyebrow">Our Core Commitment</span>
+            <h2>What We Stand For</h2>
+        </div>
+
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="vi" style="background:#0ea5e9;"><i class="fa-solid fa-microscope"></i></div>
+                <div>
+                    <h4>Advanced Technology</h4>
+                    <p>High-precision automated analyzers for accurate clinical processing.</p>
+                </div>
+            </div>
+            <div class="value-card">
+                <div class="vi" style="background:#10b981;"><i class="fa-solid fa-bullseye"></i></div>
+                <div>
+                    <h4>Accurate Reports</h4>
+                    <p>Quality-checked diagnostic data trusted by leading doctors.</p>
+                </div>
+            </div>
+            <div class="value-card">
+                <div class="vi" style="background:#6366f1;"><i class="fa-solid fa-house-medical"></i></div>
+                <div>
+                    <h4>Home Collection</h4>
+                    <p>Hassle-free sample pickup directly from your doorstep by trained phlebotomists.</p>
+                </div>
+            </div>
+            <div class="value-card">
+                <div class="vi" style="background:#f59e0b;"><i class="fa-solid fa-clock"></i></div>
+                <div>
+                    <h4>Fast Turnaround</h4>
+                    <p>Get digital test reports emailed or sent via WhatsApp within 24 hours.</p>
+                </div>
+            </div>
+            <div class="value-card">
+                <div class="vi" style="background:#ec4899;"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                <div>
+                    <h4>Transparent Pricing</h4>
+                    <p>Clear test fees with no hidden home collection charges or surprises.</p>
+                </div>
+            </div>
+            <div class="value-card">
+                <div class="vi" style="background:#14b8a6;"><i class="fa-solid fa-user-nurse"></i></div>
+                <div>
+                    <h4>Patient First</h4>
+                    <p>Compassionate care and dedicated phone support every step of the way.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- HOW IT WORKS PROCESS -->
+        <div class="process-section">
+            <div class="section-head">
+                <span class="eyebrow">Simple Workflow</span>
+                <h2>How It Works</h2>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-num">1</div>
+                    <div>
+                        <h5>Book Online or Call</h5>
+                        <p>Select your required tests or upload your prescription online.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">2</div>
+                    <div>
+                        <h5>Sample Collection</h5>
+                        <p>Our certified phlebotomist collects your sample safely at home.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">3</div>
+                    <div>
+                        <h5>Receive Digital Report</h5>
+                        <p>Access your detailed reports online or via email/WhatsApp.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CALL TO ACTION BANNER -->
+        <div class="section" style="margin-top: 40px;">
+            <div class="cta-banner" data-anim>
+                <div>
+                    <h2>Ready for a Health Checkup?</h2>
+                    <p>Book a test or select a full-body health package today.</p>
+                </div>
+                <a href="../tests/" class="btn btn-lg"><i class="fa-solid fa-flask-vial"></i> Browse All Tests</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+    <div class="footer-brand">
+        <a href="../" class="logo">
+            <img src="../images/logo.png" alt="" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo-text"><strong>Lucky Diagnostics</strong><span>Trusted Diagnostics</span></span>
+        </a>
+        <p>Trusted diagnostic healthcare services in Bhubaneswar. Accurate tests, convenient home collection, and secure reports.</p>
+        <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://wa.me/919853716027" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </div>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h5>Quick Links</h5>
+            <a href="../">Home</a><a href="../tests/">Tests</a><a href="../packages/">Packages</a><a href="../about/" class="active">About</a><a href="../contact/">Contact</a>
+        </div>
+        <div class="footer-col">
+    <h5>Quick Actions</h5>
+    <a href="tel:+919853716027">Call to Book</a>
+    <a href="https://wa.me/919853716027" target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
+    <a href="../uploadprescription/">Upload Prescription</a>
+    <a href="../contact/">Get Directions</a>
+</div>
+        <div class="footer-col">
+            <h5>Contact</h5>
+            <div class="contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+919853716027">+91 98537 16027</a></div>
+            <div class="contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:info@luckydiagnosics.com">info@luckydiagnosics.com</a></div>
+            <div class="contact-item"><i class="fa-solid fa-location-dot"></i><span>Patia, Bhubaneswar, Odisha</span></div>
+        </div>
+        <div class="footer-col">
+            <h5>Legal</h5>
+            <a href="../privacy-policy/">Privacy Policy</a><a href="../terms/">Terms &amp; Conditions</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div>© 2026 Lucky Diagnostics. All Rights Reserved.</div>
+        <div class="powered-by">Powered by <a href="https://powercloud.in/" target="_blank" rel="noopener noreferrer">PowerCloud</a></div>
+    </div>
+</footer>
+
+<!-- ========== BOTTOM NAV ========== -->
+<nav class="bottom-nav" aria-label="Primary mobile navigation">
+    <ul>
+        <li><a href="../"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+        <li><a href="../tests/"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></a></li>
+        <li><a href="../packages/"><i class="fa-solid fa-box-open"></i><span>Packages</span></a></li>
+        <li><a href="tel:+919853716027"><i class="fa-solid fa-phone"></i><span>Call to Book</span></a></li>
+        <li><a href="../about/" class="active" aria-current="page"><i class="fa-solid fa-circle-info"></i><span>About Us</span></a></li>
+    </ul>
+</nav>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- ========== SCRIPT INVOCATIONS ========== -->
+<script src="../js/config.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/assistant.js"></script>
+</body>
+</html>
