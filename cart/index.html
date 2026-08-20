@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>My Cart — Lucky Diagnostics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/banner.css">
+<link rel="icon" type="image/png" href="../images/logo.png">
+
+<style>
+.cart-wrap{max-width:800px;margin:0 auto;padding:20px 16px 100px;}
+.cart-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.cart-card .info h3{font-size:15px;margin-bottom:4px;}
+.cart-card .info .meta{font-size:12px;color:var(--muted);}
+.cart-card .price{font-weight:800;color:var(--primary);font-size:16px;white-space:nowrap;}
+.remove-btn{background:#fee2e2;color:#b91c1c;border:none;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px;}
+.cart-summary{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;margin-top:16px;}
+.cart-summary .line{display:flex;justify-content:space-between;padding:6px 0;font-size:14px;}
+.cart-summary .line.total{border-top:1px dashed var(--border);margin-top:8px;padding-top:10px;font-weight:800;font-size:17px;}
+.empty{text-align:center;padding:60px 20px;color:var(--muted);}
+.empty i{font-size:56px;opacity:.3;margin-bottom:14px;}
+.btn-block{width:100%;}
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header" id="siteHeader">
+    <div class="header-inner">
+        <a href="../" class="logo" aria-label="Lucky Diagnostics Home">
+            <img src="../images/logo.png" alt="Lucky Diagnostics logo" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo-word" aria-hidden="true">
+                <span class="l1">Lucky</span>
+                <span class="l2">Diagnostics</span>
+            </span>
+        </a>
+
+        <div class="loc-selector" id="locSelector">
+            <button class="loc-drop" id="locDropBtn" aria-haspopup="listbox" aria-expanded="false">
+                <i class="fa-solid fa-location-dot pin"></i>
+                <span id="locCurrent"><span class="loc-short">Patia</span><span class="loc-long">, Bhubaneswar</span></span>
+                <i class="fa-solid fa-chevron-down chev"></i>
+            </button>
+            <div class="loc-menu" id="locMenu" role="listbox" aria-label="Select location">
+                <button class="loc-option active" data-loc="Patia, Bhubaneswar">
+                    <i class="fa-solid fa-location-dot"></i> Patia, Bhubaneswar
+                </button>
+                <button class="loc-option" data-loc="Cuttack" data-soon="1">
+                    <i class="fa-solid fa-location-dot"></i> Cuttack <span class="soon">SOON</span>
+                </button>
+            </div>
+        </div>
+
+        <nav class="nav-desktop" aria-label="Primary">
+            <a href="../">Home</a>
+            <a href="../tests/">Tests</a>
+            <a href="../packages/">Packages</a>
+            <a href="../about/">About</a>
+            <a href="../contact/">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="tel:+919853716027" class="icon-btn" aria-label="Call us"><i class="fa-solid fa-phone"></i></a>
+            <a href="../cart/" class="icon-btn" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartBadge">0</span></a>
+            <button class="menu-toggle" id="menuBtn" aria-label="Open menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div>
+</header> 
+
+<!-- ========== MOBILE DRAWER ========== -->
+<nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <a href="../"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="../tests/"><i class="fa-solid fa-flask-vial"></i> Browse Tests</a>
+    <a href="../packages/"><i class="fa-solid fa-box-open"></i> Health Packages</a>
+    <a href="../tests/?collection=home"><i class="fa-solid fa-house-medical"></i> Home Collection</a>
+    <a href="../uploadprescription/"><i class="fa-solid fa-prescription"></i> Upload Prescription</a>
+    <a href="../about/"><i class="fa-solid fa-circle-info"></i> About Us</a>
+    <a href="../contact/"><i class="fa-solid fa-envelope"></i> Contact</a>
+    <div class="drawer-actions">
+        <a href="tel:+919853716027" class="btn btn-secondary btn-block"><i class="fa-solid fa-phone"></i> Call +91 98537 16027</a>
+    </div>
+</nav>
+
+<!-- ========== MAIN CART CONTENT ========== -->
+<main class="cart-wrap">
+  <h1 style="font-size:22px;margin-bottom:16px;"><i class="fa-solid fa-cart-shopping" style="color:var(--primary);"></i> My Cart</h1>
+  <div id="cartList"></div>
+
+  <div class="cart-summary" id="cartSummary" style="display:none;">
+    <div class="line"><span>Items</span><span id="sumCount">0</span></div>
+    <div class="line"><span>Subtotal</span><span id="sumSubtotal">₹0</span></div>
+    <div class="line total"><span>Estimated Total</span><span id="sumTotal">₹0</span></div>
+    <p style="font-size:12px;color:var(--muted);margin:10px 0;">Home collection fee (₹100) and any promo discount are applied at checkout.</p>
+    <button class="btn btn-primary btn-block btn-lg" id="proceedBtn" style="padding:14px;font-size:16px;font-weight:700;">
+      <i class="fa-solid fa-arrow-right"></i> Proceed to Book
+    </button>
+    <a href="../tests/" class="btn btn-secondary btn-block" style="margin-top:10px;display:block;text-align:center;">
+      <i class="fa-solid fa-plus"></i> Add More Tests
+    </a>
+  </div>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+    <div class="footer-brand">
+        <a href="../" class="logo">
+            <img src="../images/logo.png" alt="" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo-text"><strong>Lucky Diagnostics</strong><span>Trusted Diagnostics</span></span>
+        </a>
+        <p>Trusted diagnostic healthcare services in Bhubaneswar. Accurate tests, convenient home collection, and secure reports.</p>
+        <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://wa.me/919853716027" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </div>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h5>Quick Links</h5>
+            <a href="../">Home</a><a href="../tests/">Tests</a><a href="../packages/">Packages</a><a href="../about/">About</a><a href="../contact/">Contact</a>
+        </div>
+        <div class="footer-col">
+            <h5>Quick Actions</h5>
+            <a href="tel:+919853716027">Call to Book</a>
+            <a href="https://wa.me/919853716027" target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
+            <a href="../uploadprescription/">Upload Prescription</a>
+            <a href="../contact/">Get Directions</a>
+        </div>
+        <div class="footer-col">
+            <h5>Contact</h5>
+            <div class="contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+919853716027">+91 98537 16027</a></div>
+            <div class="contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:info@luckydiagnosics.com">info@luckydiagnosics.com</a></div>
+            <div class="contact-item"><i class="fa-solid fa-location-dot"></i><span>Patia, Bhubaneswar, Odisha</span></div>
+        </div>
+        <div class="footer-col">
+            <h5>Legal</h5>
+            <a href="../privacy-policy/">Privacy Policy</a><a href="../terms/">Terms &amp; Conditions</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div>© 2026 Lucky Diagnostics. All Rights Reserved.</div>
+        <div class="powered-by">Powered by <a href="https://powercloud.in/" target="_blank" rel="noopener noreferrer">PowerCloud</a></div>
+    </div>
+</footer>
+
+<!-- ========== BOTTOM NAV ========== -->
+<nav class="bottom-nav" aria-label="Primary mobile navigation">
+    <ul>
+        <li><a href="../"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+        <li><a href="../tests/"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></a></li>
+        <li><a href="../packages/"><i class="fa-solid fa-box-open"></i><span>Packages</span></a></li>
+        <li><a href="tel:+919853716027"><i class="fa-solid fa-phone"></i><span>Call to Book</span></a></li>
+        <li><a href="../about/"><i class="fa-solid fa-circle-info"></i><span>About Us</span></a></li>
+    </ul>
+</nav>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- ========== SCRIPT INVOCATIONS ========== -->
+<script src="../js/config.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/assistant.js"></script>
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const fmt = window.formatPrice || (n => '₹' + n);
+  const esc = window.escapeHtml || (s => String(s==null?'':s));
+
+  function render(){
+    const items = Cart.get();
+    const list = $('cartList');
+
+    if (!items.length) {
+      list.innerHTML = '<div class="empty"><i class="fa-solid fa-cart-shopping"></i><h2>Your cart is empty</h2><p style="margin:8px 0 16px;">Browse tests and packages to add items.</p><a href="../tests/" class="btn btn-primary">Browse Tests</a></div>';
+      $('cartSummary').style.display = 'none';
+      return;
+    }
+
+    list.innerHTML = items.map(i => `
+      <div class="cart-card">
+        <div class="info">
+          <h3>${esc(i.name)}</h3>
+          <div class="meta"><i class="fa-solid ${i.type==='package'?'fa-box-open':'fa-flask-vial'}"></i> ${i.type==='package'?'Health Package':'Diagnostic Test'}</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="price">${fmt(i.price)}</div>
+          <button class="remove-btn" data-remove="${esc(i.id)}" style="margin-top:6px;"><i class="fa-solid fa-trash"></i> Remove</button>
+        </div>
+      </div>
+    `).join('');
+
+    $('sumCount').textContent = items.length;
+    $('sumSubtotal').textContent = fmt(Cart.total());
+    $('sumTotal').textContent = fmt(Cart.total());
+    $('cartSummary').style.display = 'block';
+
+    list.querySelectorAll('[data-remove]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        Cart.remove(btn.getAttribute('data-remove'));
+        if (typeof showToast === 'function') showToast('Item removed', 'success');
+        render();
+      });
+    });
+  }
+
+  $('proceedBtn').addEventListener('click', () => {
+    if (!Cart.count()) { if (typeof showToast==='function') showToast('Cart is empty','error'); return; }
+    location.href = '../bookings?from=cart';
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
