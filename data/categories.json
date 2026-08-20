@@ -1,0 +1,16 @@
+{
+  "data": [
+    { "category_id": "cat_fullbody", "name": "Full Body", "slug": "full-body", "icon": "fa-user-doctor", "description": "Complete wellness checkups for total health monitoring.", "sort_order": 1 },
+    { "category_id": "cat_diabetes", "name": "Diabetes", "slug": "diabetes", "icon": "fa-droplet", "description": "Sugar monitoring and diabetes management tests.", "sort_order": 2 },
+    { "category_id": "cat_thyroid", "name": "Thyroid", "slug": "thyroid", "icon": "fa-shield-heart", "description": "Thyroid hormone balance and function tests.", "sort_order": 3 },
+    { "category_id": "cat_heart", "name": "Heart", "slug": "heart", "icon": "fa-heart-pulse", "description": "Cardiac health and cholesterol screening.", "sort_order": 4 },
+    { "category_id": "cat_vitamin", "name": "Vitamin", "slug": "vitamin", "icon": "fa-pills", "description": "Vitamin and mineral level assessments.", "sort_order": 5 },
+    { "category_id": "cat_kidney", "name": "Kidney", "slug": "kidney", "icon": "fa-kidneys", "description": "Renal function and kidney health tests.", "sort_order": 6 },
+    { "category_id": "cat_liver", "name": "Liver", "slug": "liver", "icon": "fa-lungs", "description": "Liver enzyme and function analysis.", "sort_order": 7 },
+    { "category_id": "cat_pregnancy", "name": "Pregnancy", "slug": "pregnancy", "icon": "fa-baby", "description": "Antenatal and maternal health tests.", "sort_order": 8 },
+    { "category_id": "cat_women", "name": "Women's Health", "slug": "womens-health", "icon": "fa-venus", "description": "Tests for women's specific health needs.", "sort_order": 9 },
+    { "category_id": "cat_men", "name": "Men's Health", "slug": "mens-health", "icon": "fa-mars", "description": "Tests for men's specific health needs.", "sort_order": 10 },
+    { "category_id": "cat_senior", "name": "Senior Health", "slug": "senior-health", "icon": "fa-person-cane", "description": "Specialized tests for senior citizens.", "sort_order": 11 },
+    { "category_id": "cat_fever", "name": "Fever", "slug": "fever", "icon": "fa-temperature-high", "description": "Tests to diagnose fever causes.", "sort_order": 12 }
+  ]
+}
