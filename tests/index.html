@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Diagnostic Tests in Bhubaneswar — Lucky Diagnostics</title>
+<meta name="description" content="Book blood tests, CBC, HbA1c, Lipid Profile, Thyroid and more. Home collection available across Bhubaneswar.">
+<link rel="canonical" href="https://luckydiagnostics.com/pages/tests.html">
+<meta property="og:title" content="Diagnostic Tests — Lucky Diagnostics Bhubaneswar">
+<meta property="og:description" content="150+ diagnostic tests with home collection.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/banner.css">
+<link rel="stylesheet" href="../css/listing.css">
+<link rel="icon" type="image/png" href="../images/logo.png">
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header" id="siteHeader">
+    <div class="header-inner">
+        <a href="../" class="logo" aria-label="Lucky Diagnostics Home">
+            <img src="../images/logo.png" alt="Lucky Diagnostics logo" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo-word" aria-hidden="true">
+                <span class="l1">Lucky</span>
+                <span class="l2">Diagnostics</span>
+            </span>
+        </a>
+
+        <div class="loc-selector" id="locSelector">
+            <button class="loc-drop" id="locDropBtn" aria-haspopup="listbox" aria-expanded="false">
+                <i class="fa-solid fa-location-dot pin"></i>
+                <span id="locCurrent"><span class="loc-short">Patia</span><span class="loc-long">, Bhubaneswar</span></span>
+                <i class="fa-solid fa-chevron-down chev"></i>
+            </button>
+            <div class="loc-menu" id="locMenu" role="listbox" aria-label="Select location">
+                <button class="loc-option active" data-loc="Patia, Bhubaneswar">
+                    <i class="fa-solid fa-location-dot"></i> Patia, Bhubaneswar
+                </button>
+                <button class="loc-option" data-loc="Cuttack" data-soon="1">
+                    <i class="fa-solid fa-location-dot"></i> Cuttack <span class="soon">SOON</span>
+                </button>
+            </div>
+        </div>
+
+        <nav class="nav-desktop" aria-label="Primary">
+            <a href="../">Home</a>
+            <a href="../tests/" class="active">Tests</a>
+            <a href="../packages/">Packages</a>
+            <a href="../about/">About</a>
+            <a href="../contact/">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="tel:+919853716027" class="icon-btn" aria-label="Call us"><i class="fa-solid fa-phone"></i></a>
+           <a href="../cart/" class="icon-btn" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartBadge">0</span></a>
+            <button class="menu-toggle" id="menuBtn" aria-label="Open menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div>
+</header> 
+
+<!-- ========== MOBILE DRAWER ========== -->
+<nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <a href="../"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="../tests/"><i class="fa-solid fa-flask-vial"></i> Browse Tests</a>
+    <a href="../packages/"><i class="fa-solid fa-box-open"></i> Health Packages</a>
+    <a href="../tests/"><i class="fa-solid fa-house-medical"></i> Home Collection</a>
+    <a href="../uploadprescription/"><i class="fa-solid fa-prescription"></i> Upload Prescription</a>
+    <a href="../about/"><i class="fa-solid fa-circle-info"></i> About Us</a>
+    <a href="../contact/"><i class="fa-solid fa-envelope"></i> Contact</a>
+    <div class="drawer-actions">
+        <a href="tel:+919853716027" class="btn btn-secondary btn-block"><i class="fa-solid fa-phone"></i> Call +91 98537 16027</a>
+    </div>
+</nav>
+
+<main>
+    <div class="page-head">
+        <h1>Diagnostic Tests</h1>
+        <p>Browse 150+ tests with home sample collection available</p>
+    </div>
+
+    <div class="sticky-bar">
+        <div class="search-input">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" id="listingSearch" placeholder="Search tests..." autocomplete="off" aria-label="Search tests">
+        </div>
+        <div class="filter-row" id="filterRow"></div>
+    </div>
+
+    <div class="listing" id="listingGrid"></div>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+    <div class="footer-brand">
+        <a href="../" class="logo">
+            <img src="../images/logo.png" alt="" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo-text"><strong>Lucky Diagnostics</strong><span>Trusted Diagnostics</span></span>
+        </a>
+        <p>Trusted diagnostic healthcare services in Bhubaneswar. Accurate tests, convenient home collection, and secure reports.</p>
+        <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://wa.me/919853716027" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </div>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h5>Quick Links</h5>
+            <a href="../">Home</a><a href="../tests/">Tests</a><a href="../packages/">Packages</a><a href="../about/">About</a><a href="../contact/">Contact</a>
+        </div>
+        <div class="footer-col">
+    <h5>Quick Actions</h5>
+    <a href="tel:+919853716027">Call to Book</a>
+    <a href="https://wa.me/919853716027" target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
+    <a href="../uploadprescription/">Upload Prescription</a>
+    <a href="../contact/">Get Directions</a>
+</div>
+        <div class="footer-col">
+            <h5>Contact</h5>
+            <div class="contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+919853716027">+91 98537 16027</a></div>
+            <div class="contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:info@luckydiagnosics.com">info@luckydiagnosics.com</a></div>
+            <div class="contact-item"><i class="fa-solid fa-location-dot"></i><span>Patia, Bhubaneswar, Odisha</span></div>
+        </div>
+        <div class="footer-col">
+            <h5>Legal</h5>
+            <a href="../privacy-policy/">Privacy Policy</a><a href="../terms/">Terms &amp; Conditions</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div>© 2026 Lucky Diagnostics. All Rights Reserved.</div>
+        <div class="powered-by">Powered by <a href="https://powercloud.in/" target="_blank" rel="noopener noreferrer">PowerCloud</a></div>
+    </div>
+</footer>
+
+<!-- ========== BOTTOM NAV ========== -->
+<nav class="bottom-nav" aria-label="Primary mobile navigation">
+    <ul>
+        <li><a href="../"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+        <li><a href="../tests/" class="active" aria-current="page"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></a></li>
+        <li><a href="../packages/"><i class="fa-solid fa-box-open"></i><span>Packages</span></a></li>
+        <li><a href="tel:+919853716027"><i class="fa-solid fa-phone"></i><span>Call to Book</span></a></li>
+        <li><a href="../about/"><i class="fa-solid fa-circle-info"></i><span>About Us</span></a></li>
+    </ul>
+</nav>
+
+<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+<!-- ========== SINGLE SCRIPT INVOCATIONS ========== -->
+<script src="../js/config.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/cart.js"></script> 
+<script src="../js/api.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/listing.js"></script>
+<script src="../js/assistant.js"></script>
+</body>
+</html>
