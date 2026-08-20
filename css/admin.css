@@ -1,0 +1,182 @@
+/* ============ ADMIN LOGIN PAGES ============ */
+body.admin-auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(135deg,var(--primary-50),#f0f9ff);}
+.auth-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:28px;width:100%;max-width:400px;box-shadow:var(--shadow-md);}
+.auth-logo{width:64px;height:64px;margin:0 auto 12px;background:var(--primary-50);color:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;}
+.auth-card h1{font-size:22px;text-align:center;margin-bottom:4px;}
+.auth-card p{text-align:center;color:var(--muted);font-size:14px;margin-bottom:18px;}
+.auth-card label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;margin-bottom:14px;}
+.auth-card input{border:1.5px solid var(--border);border-radius:var(--radius);padding:12px;font-size:15px;outline:none;}
+.auth-card input:focus{border-color:var(--primary);}
+
+/* ============ LAYOUT ============ */
+.admin-layout{display:flex;min-height:100vh;}
+.admin-sidebar{width:250px;background:var(--text);color:var(--surface-2);position:fixed;top:0;bottom:0;left:0;overflow-y:auto;z-index:50;transform:translateX(-100%);transition:transform .3s ease;}
+.admin-sidebar.open{transform:translateX(0);}
+.admin-sidebar .brand{padding:20px;font-weight:800;color:#fff;font-family:var(--font-display);font-size:16px;display:flex;align-items:center;gap:10px;}
+.admin-sidebar a{display:flex;gap:12px;align-items:center;padding:12px 20px;color:var(--muted-2);font-size:14px;}
+.admin-sidebar a i{width:18px;text-align:center;}
+.admin-sidebar a.active,.admin-sidebar a:hover{background:rgba(255,255,255,.08);color:#fff;}
+
+/* ✅ FIX 1: min-width:0 → table scrolls INSIDE the card, page no longer overflows */
+.admin-main{flex:1;margin-left:0;padding:16px;min-width:0;}
+
+.admin-topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.admin-topbar h2{font-size:20px;flex:1;}
+.admin-menu-btn{width:44px;height:44px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);}
+.admin-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:49;display:none;}
+.admin-backdrop.show{display:block;}
+
+/* stats */
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px;}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;}
+.stat-card .num{font-size:24px;font-weight:800;font-family:var(--font-display);color:var(--primary);}
+.stat-card .lbl{font-size:12px;color:var(--muted);}
+
+/* ============ TABLE (desktop) ============ */
+.admin-table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;box-shadow:0 2px 8px rgba(15,23,42,.06);}
+.admin-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:1100px;}
+
+/* ✅ FIX 2: gradient + white text on the TH cells themselves */
+.admin-table thead{background:linear-gradient(180deg,#0d9488,#0f766e);}
+.admin-table thead th{background:linear-gradient(180deg,#0d9488,#0f766e);color:#fff;padding:12px 14px;text-align:left;font-weight:600;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;border-bottom:2px solid #0a7a72;}
+
+.admin-table tbody tr{border-bottom:1px solid var(--border);transition:background .15s;}
+.admin-table tbody tr:hover{background:#f8fafc;}
+.admin-table tbody td{padding:12px 14px;vertical-align:middle;color:var(--text,#334155);white-space:nowrap;}
+
+.admin-table td[data-th="booking_id"]{font-family:'SF Mono',Consolas,monospace;font-size:12px;color:#64748b;}
+.admin-table td[data-th="booking_id"],.admin-table td[data-th="patient_name"]{font-weight:600;}
+.admin-table td[data-th="total"]{font-weight:700;color:var(--primary,#0d9488);}
+.admin-table tbody td:empty{color:#cbd5e1;font-style:italic;}
+.admin-table tbody td:empty::before{content:'—';}
+.admin-table td[data-th="patient_mobile"]:empty::before,
+.admin-table td[data-th="patient_email"]:empty::before,
+.admin-table td[data-th="patient_gender"]:empty::before,
+.admin-table td[data-th="patient_age"]:empty::before,
+.admin-table td[data-th="address"]:empty::before{content:'Not provided';font-style:italic;color:#94a3b8;}
+
+/* ✅ FIX 3: NO display:flex on desktop → buttons stay in one line, row height normal */
+.td-actions{white-space:nowrap;}
+.td-actions .btn{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;font-size:11.5px;min-height:32px;border-radius:6px;margin-right:6px;}
+
+/* ============ MODAL ============ */
+.modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:100;display:none;align-items:center;justify-content:center;padding:16px;}
+.modal-backdrop.open{display:flex;}
+.modal{background:var(--surface);border-radius:var(--radius-lg);width:100%;max-width:520px;max-height:85vh;overflow-y:auto;padding:20px;}
+.modal h3{margin-bottom:16px;}
+.modal label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;margin-bottom:12px;}
+.modal input,.modal select,.modal textarea{border:1.5px solid var(--border);border-radius:var(--radius);padding:10px;font-size:14px;}
+
+/* ============ DESKTOP ============ */
+@media(min-width:1024px){
+  .admin-sidebar{transform:translateX(0);}
+  .admin-main{margin-left:250px;padding:24px;}
+  .admin-menu-btn{display:none;}
+  .stat-grid{grid-template-columns:repeat(4,1fr);}
+}
+
+/* ============ MOBILE ============ */
+@media(max-width:1023px){
+  .admin-main{padding:12px;padding-bottom:40px;}
+  .admin-topbar{position:sticky;top:0;z-index:45;background:var(--bg);padding:10px 0;margin-bottom:12px;}
+  .admin-topbar h2{font-size:17px;}
+  .stat-grid{gap:8px;}
+  .stat-card{padding:12px;}
+  .stat-card .num{font-size:20px;}
+  .admin-sidebar{width:260px;box-shadow:0 0 40px rgba(0,0,0,.3);}
+  .modal-backdrop{align-items:flex-end;padding:0;}
+  .modal{max-width:100%;max-height:88vh;border-radius:20px 20px 0 0;}
+}
+
+/* ============ MOBILE CARD VIEW (single breakpoint, no conflicts) ============ */
+@media(max-width:900px){
+  .admin-table{min-width:0;}
+  .admin-table thead{display:none;}
+  .admin-table,.admin-table tbody{display:block;width:100%;}
+  .admin-table tbody tr{display:block;background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(15,23,42,.06);}
+  .admin-table tbody td{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;padding:6px 0;border:none;font-size:13px;white-space:normal;}
+  .admin-table tbody td::before{content:attr(data-th);font-weight:600;color:#64748b;font-size:11px;text-transform:uppercase;letter-spacing:.03em;}
+  .admin-table tbody td:empty{display:none;}
+  .td-actions{display:flex;grid-column:1/-1;margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);}
+  .td-actions .btn{flex:1;text-align:center;margin-right:0;}
+}
+
+/* ============ BOOKINGS: compact patient cell ============ */
+.bookings-table{min-width:860px;}
+.bk-id{font-family:'SF Mono',Consolas,monospace;font-size:12px;color:#64748b;display:block;}
+.bk-status{display:inline-block;margin-top:4px;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;background:#e2e8f0;color:#475569;}
+.bk-status.pending{background:#fef3c7;color:#b45309;}
+.bk-status.confirmed,.bk-status.collected{background:#ccfbf1;color:#0f766e;}
+.bk-status.completed{background:#dcfce7;color:#15803d;}
+.bk-status.cancelled{background:#fee2e2;color:#b91c1c;}
+
+.pt-cell{display:flex;flex-direction:column;gap:3px;min-width:230px;white-space:normal;}
+.pt-name{font-weight:700;font-size:13.5px;color:var(--text,#1e293b);}
+.pt-tag{font-weight:600;color:#64748b;font-size:12px;}
+.pt-sub{font-size:12px;color:#64748b;display:flex;align-items:center;gap:6px;}
+.pt-sub i{width:12px;color:#94a3b8;font-size:11px;flex-shrink:0;}
+
+.method-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;background:var(--primary-50,#f0fdfa);color:var(--primary,#0d9488);border:1px solid rgba(13,148,136,.25);white-space:nowrap;}
+.dt-cell{font-weight:600;white-space:nowrap;}
+.tm-cell{color:#64748b;white-space:nowrap;}
+
+/* ============ BOOKING DETAILS POPUP ============ */
+.bk-modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:14px;}
+.bk-modal-head h3{margin:0;font-size:17px;}
+.modal-close{border:none;background:var(--surface-2,#f1f5f9);width:32px;height:32px;border-radius:8px;cursor:pointer;color:#64748b;}
+.bk-sec{background:var(--surface-2,#f8fafc);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:12px;}
+.bk-sec h4{margin:0 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#64748b;}
+.bk-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;font-size:13px;}
+.bk-grid .full{grid-column:1/-1;}
+.bk-grid .k{color:#94a3b8;font-size:11px;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:1px;}
+.bk-grid .v{font-weight:600;color:var(--text,#334155);word-break:break-word;}
+.bk-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
+.bk-actions .btn{flex:1;min-width:120px;justify-content:center;}
+@media(max-width:520px){.bk-grid{grid-template-columns:1fr;}}
+.bk-status.processing{background:#e0e7ff;color:#4338ca;}
+
+/* ========== BOOKING ITEMS IN POPUP ========== */
+.bk-items-summary{font-size:13px;font-weight:600;color:var(--text,#334155);}
+.bk-items-summary i{color:var(--primary);margin-right:4px;}
+
+.bk-items-wrap{margin-top:4px;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.bk-items-table{width:100%;border-collapse:collapse;font-size:13px;}
+.bk-items-table thead{background:var(--surface-2,#f1f5f9);}
+.bk-items-table th{padding:8px 10px;text-align:left;font-size:11px;text-transform:uppercase;color:#64748b;font-weight:600;letter-spacing:.03em;}
+.bk-items-table td{padding:9px 10px;border-top:1px solid var(--border);color:var(--text,#334155);}
+.bk-items-table tbody tr:hover{background:#f8fafc;}
+.bk-items-table td i{width:14px;}
+
+/* ============ BOOKED ON TIMESTAMP ============ */
+.booked-on-cell{
+  font-size: 12px;
+  color: #475569;
+  white-space: nowrap;
+  font-family: 'SF Mono', Consolas, monospace;
+}
+.booked-on-cell i{
+  color: var(--primary);
+  margin-right: 4px;
+}
+.booked-on-cell small{
+  font-size: 11px;
+  color: #94a3b8;
+  display: block;
+  margin-top: 2px;
+}
+
+/* Highlight the "Booked On" row in the popup */
+.bk-grid .highlight-time{
+  background: linear-gradient(90deg, var(--primary-50, #f0fdfa), transparent);
+  border-left: 3px solid var(--primary);
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+/* Bookings enhanced styles */
+.bookings-table{min-width:1000px;}
+.booked-on-cell{font-size:12px;color:#64748b;white-space:nowrap;}
+.booked-on-cell i{color:var(--primary);margin-right:4px;}
+.booked-on-cell small{font-size:11px;color:#94a3b8;display:block;margin-top:2px;}
+.bk-status.processing{background:#e0e7ff;color:#4338ca;}
+.highlight-time{background:linear-gradient(90deg,var(--primary-50),transparent);border-left:3px solid var(--primary);padding:8px 10px;border-radius:6px;}
