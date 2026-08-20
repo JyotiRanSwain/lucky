@@ -1,61 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0d9488">
-
-<title>Lucky Diagnostics — Trusted Diagnostic Center in Bhubaneswar | Home Sample Collection</title>
-<meta name="description" content="Lucky Diagnostics, Patia, Bhubaneswar offers accurate diagnostic tests, health packages, and home sample collection. Book blood tests, MRI, CT scans, full body checkups online.">
-<link rel="canonical" href="https://luckydiagnostics.com/">
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lucky Diagnostics — Trusted Diagnostic Center in Bhubaneswar">
-<meta property="og:description" content="Accurate diagnostic testing, home sample collection, and easy access to your health reports.">
-<meta property="og:image" content="https://luckydiagnostics.com/images/og-home.jpg">
-<meta property="og:url" content="https://luckydiagnostics.com/">
-<meta property="og:site_name" content="Lucky Diagnostics">
-<meta name="twitter:card" content="summary_large_image">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Upload Prescription — Lucky Diagnostics</title>
+<meta name="description" content="Upload your doctor's prescription and we'll arrange your tests and sample collection.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/banner.css">
-<link rel="icon" type="image/png" href="images/logo.png">
-
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "MedicalBusiness",
-    "name": "Lucky Diagnostics",
-    "image": "https://luckydiagnostics.com/images/logo.png",
-    "url": "https://luckydiagnostics.com/",
-    "telephone": "+919853716027",
-    "email": "info@luckydiagnosics.com",
-    "address": { "@type": "PostalAddress", "streetAddress": "Patia", "addressLocality": "Bhubaneswar", "addressRegion": "Odisha", "postalCode": "751024", "addressCountry": "IN" },
-    "priceRange": "₹₹",
-    "openingHours": "Mo-Su 07:00-21:00"
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/banner.css">
+<link rel="icon" type="image/png" href="../images/logo.png">
+<style>
+.up-wrap{max-width:620px;margin:0 auto;padding:16px;}
+.up-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;}
+.form-section-title{font-size:16px;font-weight:700;margin:18px 0 12px 0;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:6px;}
+.form-section-title:first-child{margin-top:0;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.up-card label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;margin-bottom:12px;}
+.up-card input,.up-card select,.up-card textarea{border:1.5px solid var(--border);border-radius:var(--radius);padding:10px 12px;font-size:14px;outline:none;background:#fff;}
+.up-card input:focus,.up-card select:focus,.up-card textarea:focus{border-color:var(--accent,#0056b3);}
+.radio-group{display:flex;gap:16px;align-items:center;padding:6px 0;}
+.radio-label{display:flex !important;flex-direction:row !important;align-items:center;gap:6px;font-weight:500 !important;cursor:pointer;}
+.radio-label input{margin:0;}
+.drop{border:2px dashed var(--accent);background:#fff;border-radius:var(--radius-lg);padding:20px;text-align:center;cursor:pointer;margin-bottom:12px;}
+.drop i{font-size:32px;color:var(--accent);}
+.drop strong{display:block;margin-top:6px;font-size:14px;}
+.drop span{font-size:12px;color:var(--muted);}
+.fname{background:var(--success-bg,#e6f4ea);color:var(--success,#137333);border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;margin-bottom:12px;display:none;}
+@media (max-width: 480px) {
+  .grid-2{grid-template-columns:1fr;}
 }
-</script>
-</head>
+</style></head>
 <body>
 
 <!-- ========== HEADER ========== -->
 <header class="site-header" id="siteHeader">
     <div class="header-inner">
-
-        <a href="./" class="logo" aria-label="Lucky Diagnostics Home">
-            <img src="images/logo.png" alt="Lucky Diagnostics logo" class="logo-img" onerror="this.style.display='none'">
+        <a href="../" class="logo" aria-label="Lucky Diagnostics Home">
+            <img src="../images/logo.png" alt="Lucky Diagnostics logo" class="logo-img" onerror="this.style.display='none'">
             <span class="logo-word" aria-hidden="true">
                 <span class="l1">Lucky</span>
                 <span class="l2">Diagnostics</span>
             </span>
         </a>
 
-        <!-- Location pill — right next to logo -->
         <div class="loc-selector" id="locSelector">
             <button class="loc-drop" id="locDropBtn" aria-haspopup="listbox" aria-expanded="false">
                 <i class="fa-solid fa-location-dot pin"></i>
@@ -73,253 +57,127 @@
         </div>
 
         <nav class="nav-desktop" aria-label="Primary">
-            <a href="./" class="active">Home</a>
-            <a href="./tests/">Tests</a>
-            <a href="./packages/">Packages</a>
-            <a href="./about/">About</a>
-            <a href="./contact/">Contact</a>
+            <a href="../">Home</a>
+            <a href="../tests/">Tests</a>
+            <a href="../packages/">Packages</a>
+            <a href="../about/">About</a>
+            <a href="../contact/">Contact</a>
         </nav>
 
         <div class="header-actions">
             <a href="tel:+919853716027" class="icon-btn" aria-label="Call us"><i class="fa-solid fa-phone"></i></a>
-            <a href="./cart/" class="icon-btn" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartBadge">0</span></a>
+            <a href="../" class="icon-btn" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartBadge">0</span></a>
             <button class="menu-toggle" id="menuBtn" aria-label="Open menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
         </div>
     </div>
-</header>
+</header> 
 
 <!-- ========== MOBILE DRAWER ========== -->
 <nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
-    <a href="./"><i class="fa-solid fa-house"></i> Home</a>
-    <a href="./tests/"><i class="fa-solid fa-flask-vial"></i> Browse Tests</a>
-    <a href="./packages/"><i class="fa-solid fa-box-open"></i> Health Packages</a>
-    <a href="./tests/"><i class="fa-solid fa-house-medical"></i> Home Collection</a>
-    <a href="./uploadprescription/"><i class="fa-solid fa-prescription"></i> Upload Prescription</a>
-    <a href="./about/"><i class="fa-solid fa-circle-info"></i> About Us</a>
-    <a href="./contact/"><i class="fa-solid fa-envelope"></i> Contact</a>
+    <a href="../"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="../tests/"><i class="fa-solid fa-flask-vial"></i> Browse Tests</a>
+    <a href="../packages/"><i class="fa-solid fa-box-open"></i> Health Packages</a>
+    <a href="../tests/"><i class="fa-solid fa-house-medical"></i> Home Collection</a>
+    <a href="../uploadprescription/"><i class="fa-solid fa-prescription"></i> Upload Prescription</a>
+    <a href="../about/"><i class="fa-solid fa-circle-info"></i> About Us</a>
+    <a href="../contact/"><i class="fa-solid fa-envelope"></i> Contact</a>
     <div class="drawer-actions">
         <a href="tel:+919853716027" class="btn btn-secondary btn-block"><i class="fa-solid fa-phone"></i> Call +91 98537 16027</a>
     </div>
 </nav>
 
 <main>
-
-<!-- ========== HERO WITH ROTATING BANNER BACKGROUND ========== -->
-<section class="hero" id="hero">
-
-    <div class="hero-bg" aria-hidden="true">
-        <div class="hero-bg-img active" style="background-image:url('images/banner1.png')"></div>
-        <div class="hero-bg-img" style="background-image:url('images/banner2.png')"></div>
-        <div class="hero-overlay"></div>
+<div class="page-head"><h1>Book Sample Collection & Upload Prescription</h1><p>Fill in your details to request booking via WhatsApp</p></div>
+<div class="up-wrap">
+  <div class="up-card">
+    
+    <!-- Patient Details -->
+    <div class="form-section-title">Patient Details</div>
+    <label>Patient Name *<input id="pName" placeholder="Full name" required></label>
+    
+    <div class="grid-2">
+      <label>Gender *
+        <select id="pGender" required>
+          <option value="">Select</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </label>
+      <label>Age *<input id="pAge" type="number" placeholder="e.g. 30" min="1" max="120" required></label>
     </div>
 
-    <div class="hero-inner">
-        <div class="hero-content">
-            <span class="hero-badge"><span class="dot"></span> Trusted by families across Bhubaneswar</span>
-            <h1>Better Health Starts With <span class="highlight">Better Diagnostics</span></h1>
-            <p class="hero-sub">Reliable diagnostic testing, convenient home sample collection, and secure access to your health reports — all from your phone.</p>
+    <div class="grid-2">
+      <label>Mobile *<input id="pMobile" type="tel" placeholder="10-digit mobile number" required></label>
+      <label>Email *<input id="pEmail" type="email" placeholder="Your email address" required></label>
+    </div>
 
-            <form class="hero-search" role="search" onsubmit="return handleSearch(event)">
-                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                <input type="search" id="heroSearchInput" placeholder="Search tests, packages..." aria-label="Search" autocomplete="off">
-                <button type="submit">Search</button>
-            </form>
+    <!-- Collection Method -->
+    <div class="form-section-title">Collection Method</div>
+    <div class="radio-group">
+      <label class="radio-label">
+        <input type="radio" name="method" value="Home Collection" checked onclick="toggleAddress(true)"> Home Collection
+      </label>
+      <label class="radio-label">
+        <input type="radio" name="method" value="Visit Center" onclick="toggleAddress(false)"> Visit Center
+      </label>
+    </div>
 
-            <div class="hero-cta-row">
-                <a href="./tests/" class="btn btn-primary">
-                    <i class="fa-solid fa-house-medical"></i> Book Collection
-                </a>
-                <a href="tel:+919853716027" class="btn btn-secondary">
-                    <i class="fa-solid fa-phone"></i> Contact Us
-                </a>
-            </div>
+    <!-- Address Section -->
+    <div id="addressSec">
+      <div class="form-section-title">Address</div>
+      <div class="grid-2">
+        <label>House / Flat<input id="pHouse" placeholder="Flat No, House Name"></label>
+        <label>Street / Area<input id="pStreet" placeholder="Street, Sector, Area"></label>
+      </div>
+      <div class="grid-2">
+        <label>Landmark<input id="pLandmark" placeholder="Nearby landmark"></label>
+        <label>Pin Code *<input id="pPincode" type="text" placeholder="6-digit PIN code"></label>
+      </div>
+    </div>
 
-            <div class="hero-tags" aria-label="Popular searches">
-    <button type="button" class="chip" data-search="CBC"><i class="fa-solid fa-fire"></i> CBC</button>
-    <button type="button" class="chip" data-search="Thyroid">Thyroid</button>
-    <button type="button" class="chip" data-search="HbA1c">HbA1c</button>
-    <button type="button" class="chip" data-search="Vitamin D">Vitamin D</button>
-    <button type="button" class="chip" data-search="Full Body Checkup">Full Body Checkup</button>
-    <button type="button" class="chip" data-search="MRI">MRI</button>
+    <!-- Schedule -->
+    <div class="form-section-title">Schedule</div>
+    <div class="grid-2">
+      <label>Collection Date *<input id="pDate" type="date" required></label>
+      <label>Time Slot *
+        <select id="pTime" required>
+          <option value="">Select</option>
+          <option value="07:00 - 09:00">07:00 - 09:00</option>
+          <option value="09:00 - 11:00">09:00 - 11:00</option>
+          <option value="11:00 - 13:00">11:00 - 13:00</option>
+          <option value="13:00 - 15:00">13:00 - 15:00</option>
+          <option value="15:00 - 17:00">15:00 - 17:00</option>
+          <option value="17:00 - 19:00">17:00 - 19:00</option>
+        </select>
+      </label>
+    </div>
+
+    <!-- Prescription Upload (Optional) -->
+    <div class="form-section-title">Prescription (Optional)</div>
+    <label class="drop" for="file">
+      <i class="fa-solid fa-file-medical"></i>
+      <strong>Tap to upload prescription (Optional)</strong>
+      <span>PDF, JPG, PNG (max 10MB)</span>
+      <input type="file" id="file" accept=".pdf,.jpg,.jpeg,.png" hidden>
+    </label>
+    <div class="fname" id="fname"></div>
+
+    <button class="btn btn-accent btn-block btn-lg" id="upBtn" style="margin-top:10px;">
+      <i class="fa-brands fa-whatsapp"></i> Request Booking via WhatsApp
+    </button>
+    <p class="text-xs text-muted" style="text-align:center;margin-top:10px;">
+      <i class="fa-solid fa-shield-halved" style="color:var(--primary);"></i> Secure request. Your details will be sent directly via WhatsApp.
+    </p>
+  </div>
 </div>
-        </div>
-    </div>
-
-    <div class="banner-dots" id="bannerDots">
-        <button class="dot active" aria-label="Show banner 1"></button>
-        <button class="dot" aria-label="Show banner 2"></button>
-    </div>
-</section>
-
-<!-- ========== QUICK ACTIONS ========== -->
-<section class="section-sm">
-    <div class="quick-actions">
-        <a href="./tests/" class="quick-action"><div class="qa-icon"><i class="fa-solid fa-flask-vial"></i></div><div class="qa-text"><strong>Browse Tests</strong><span>150+ diagnostic tests</span></div></a>
-        <a href="./packages/" class="quick-action"><div class="qa-icon"><i class="fa-solid fa-box-open"></i></div><div class="qa-text"><strong>Health Packages</strong><span>Save with combos</span></div></a>
-        <a href="./tests/" class="quick-action"><div class="qa-icon"><i class="fa-solid fa-house-medical-circle-check"></i></div><div class="qa-text"><strong>Home Collection</strong><span>Sample pickup at home</span></div></a>
-        <a href="./uploadprescription/" class="quick-action"><div class="qa-icon"><i class="fa-solid fa-prescription"></i></div><div class="qa-text"><strong>Upload Rx</strong><span>Book from prescription</span></div></a>
-    </div>
-</section>
-
-<!-- ========== POPULAR TESTS ========== -->
-<section class="section" style="background: var(--surface);">
-    <div class="section-head">
-        <div class="section-head-row">
-            <div><span class="eyebrow">Popular Tests</span><h2>Most Booked Tests</h2></div>
-            <a href="./tests/">View all <i class="fa-solid fa-chevron-right"></i></a>
-        </div>
-        <p>Accurate results with home collection available</p>
-    </div>
-
-    <div class="carousel tests-carousel">
-        <div class="carousel-track" id="homeTestGrid"><!-- filled dynamically by home-lists.js --></div>
-    </div>
-</section>
-
-<!-- ========== PACKAGES ========== -->
-<section class="section">
-    <div class="section-head">
-        <div class="section-head-row">
-            <div><span class="eyebrow">Save More</span><h2>Health Packages</h2></div>
-            <a href="./packages/">View all <i class="fa-solid fa-chevron-right"></i></a>
-        </div>
-        <p>Comprehensive bundles at the best prices</p>
-    </div>
-
-    <div class="carousel packages-carousel">
-        <div class="carousel-track" id="homePackageGrid"><!-- filled dynamically by home-lists.js --></div>
-    </div>
-</section>
-
-<!-- ========== WHY CHOOSE ========== -->
-<section class="section">
-    <div class="section-head">
-        <span class="eyebrow">Why Choose Us</span>
-        <h2>Why Bhubaneswar Trusts Us</h2>
-        <p>Accurate reports, transparent pricing, genuine care</p>
-    </div>
-    <div class="feature-list">
-        <div class="feature-item" data-anim><div class="f-icon"><i class="fa-solid fa-flask-vial"></i></div><div><h4>Accurate Reports</h4><p>Experienced technicians and validated testing processes for reliable results.</p></div></div>
-        <div class="feature-item" data-anim><div class="f-icon"><i class="fa-solid fa-house-medical"></i></div><div><h4>Home Sample Collection</h4><p>Trained phlebotomists visit your home in Bhubaneswar for safe collection.</p></div></div>
-        <div class="feature-item" data-anim><div class="f-icon"><i class="fa-solid fa-clock"></i></div><div><h4>Fast Turnaround</h4><p>Most reports delivered within 24 hours. Digital access anytime.</p></div></div>
-        <div class="feature-item" data-anim><div class="f-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div><div><h4>Transparent Pricing</h4><p>No hidden charges. Clear prices and visible discounts.</p></div></div>
-        <div class="feature-item" data-anim><div class="f-icon"><i class="fa-solid fa-lock"></i></div><div><h4>Secure &amp; Private</h4><p>Your medical data and reports are securely stored and access-controlled.</p></div></div>
-        <div class="feature-item" data-anim><div class="f-icon"><i class="fa-solid fa-headset"></i></div><div><h4>Dedicated Support</h4><p>Friendly team available on call to help with bookings and reports.</p></div></div>
-    </div>
-</section>
-
-<!-- ========== HOME COLLECTION CTA ========== -->
-<section class="section">
-    <div class="cta-banner" data-anim>
-        <div><h2>Book Home Sample Collection</h2><p>Skip the queues. Our trained phlebotomists come to your home at a time that works for you.</p></div>
-        <a href="./tests/" class="btn btn-lg"><i class="fa-solid fa-calendar-check"></i> Book Collection</a>
-    </div>
-</section>
-
-<!-- ========== HOW IT WORKS ========== -->
-<section class="section">
-    <div class="section-head">
-        <span class="eyebrow">Process</span>
-        <h2>How It Works</h2>
-        <p>Simple journey from booking to reports</p>
-    </div>
-    <div class="steps">
-        <div class="step" data-anim><div class="step-num">1</div><div class="step-content"><h4>Book a Test</h4><p>Browse tests or upload a prescription to get started.</p></div></div>
-        <div class="step" data-anim><div class="step-num">2</div><div class="step-content"><h4>Sample Collection</h4><p>Visit our center or book home collection at your convenience.</p></div></div>
-        <div class="step" data-anim><div class="step-num">3</div><div class="step-content"><h4>Lab Analysis</h4><p>Skilled technicians analyze your sample with validated protocols.</p></div></div>
-        <div class="step" data-anim><div class="step-num">4</div><div class="step-content"><h4>Receive Reports</h4><p>Securely download approved reports online or via email.</p></div></div>
-    </div>
-</section>
-
-<!-- ========== LOCATION ========== -->
-<section class="section">
-    <div class="section-head">
-        <span class="eyebrow">Visit Us</span>
-        <h2>Our Diagnostic Center</h2>
-        <p>Convenient location for in-person visits</p>
-    </div>
-    <div class="location-card" data-anim>
-        <div class="location-map"><i class="fa-solid fa-map-location-dot"></i></div>
-        <div class="location-info">
-            <h3>Lucky Diagnostics, Patia</h3>
-            <div class="loc-item"><i class="fa-solid fa-location-dot"></i><div><strong>Address</strong><span>Patia, Bhubaneswar, Odisha 751024</span></div></div>
-            <div class="loc-item"><i class="fa-solid fa-phone"></i><div><strong>Phone</strong><a href="tel:+919853716027">+91 98537 16027</a></div></div>
-            <div class="loc-item"><i class="fa-solid fa-envelope"></i><div><strong>Email</strong><a href="mailto:info@luckydiagnosics.com">info@luckydiagnosics.com</a></div></div>
-            <div class="loc-item"><i class="fa-solid fa-clock"></i><div><strong>Hours</strong><span>Mon – Sun: 7:00 AM – 9:00 PM</span></div></div>
-        </div>
-        <div class="location-actions">
-            <a href="https://www.google.com/maps/search/?api=1&query=Patia+Bhubaneswar" target="_blank" rel="noopener" class="btn btn-primary"><i class="fa-solid fa-diamond-turn-right"></i> Directions</a>
-            <a href="tel:+919853716027" class="btn btn-secondary"><i class="fa-solid fa-phone"></i> Call</a>
-        </div>
-    </div>
-</section>
-
-<!-- ========== HEALTH GUIDE ========== -->
-<section class="section" style="background: var(--surface);">
-    <div class="section-head">
-        <div class="section-head-row">
-            <div><span class="eyebrow">Health Guide</span><h2>Learn About Your Health</h2></div>
-
-        </div>
-        <p>Evidence-based articles on tests and preventive care</p>
-    </div>
-    <div class="carousel articles-carousel">
-        <div class="carousel-track">
-            <a href="./health-guide/?slug=do-i-need-to-fast-before-blood-test" class="article-card"><div class="article-thumb"><i class="fa-solid fa-utensils"></i></div><div class="article-body"><span class="article-tag">Preparation</span><h4>Do I Need to Fast Before a Blood Test?</h4><div class="meta"><i class="fa-regular fa-clock"></i> 5 min read</div></div></a>
-            <a href="./health-guide/?slug=how-accurate-are-diagnostic-lab-tests" class="article-card"><div class="article-thumb"><i class="fa-solid fa-flask"></i></div><div class="article-body"><span class="article-tag">Lab Tests</span><h4>How Accurate Are Diagnostic Lab Tests?</h4><div class="meta"><i class="fa-regular fa-clock"></i> 7 min read</div></div></a>
-            <a href="./health-guide/?slug=how-to-prepare-for-mri" class="article-card"><div class="article-thumb"><i class="fa-solid fa-x-ray"></i></div><div class="article-body"><span class="article-tag">Imaging</span><h4>How Should I Prepare for an MRI?</h4><div class="meta"><i class="fa-regular fa-clock"></i> 6 min read</div></div></a>
-            <a href="./health-guide/?slug=vitamin-d-deficiency" class="article-card"><div class="article-thumb"><i class="fa-solid fa-sun"></i></div><div class="article-body"><span class="article-tag">Vitamin</span><h4>Vitamin D Deficiency: Signs and Solutions</h4><div class="meta"><i class="fa-regular fa-clock"></i> 5 min read</div></div></a>
-        </div>
-    </div>
-</section>
-
-<!-- ========== FAQ ========== -->
-<section class="section">
-    <div class="section-head">
-        <span class="eyebrow">FAQ</span>
-        <h2>Frequently Asked Questions</h2>
-        <p>Common questions about our services</p>
-    </div>
-    <div class="faq-wrap" id="faqWrap">
-        <div class="faq-item"><button class="faq-q" aria-expanded="false"><span>How do I book a home sample collection?</span><span class="ico"><i class="fa-solid fa-chevron-down"></i></span></button><div class="faq-a"><div class="faq-a-inner">Select a test or package, choose Home Collection, enter your address, and pick a convenient time. Our trained phlebotomist will visit your location for safe, sterile sample collection.</div></div></div>
-        <div class="faq-item"><button class="faq-q" aria-expanded="false"><span>How soon will I receive my test reports?</span><span class="ico"><i class="fa-solid fa-chevron-down"></i></span></button><div class="faq-a"><div class="faq-a-inner">Most test reports are available within 6 to 24 hours of sample collection. Some specialized tests may take 2–3 days. You'll receive an email notification as soon as your report is ready.</div></div></div>
-        <div class="faq-item"><button class="faq-q" aria-expanded="false"><span>Are my reports and data secure?</span><span class="ico"><i class="fa-solid fa-chevron-down"></i></span></button><div class="faq-a"><div class="faq-a-inner">Yes. Your reports are stored securely and access requires authentication. Only you and authorized medical staff can view your reports. We never share patient data with third parties.</div></div></div>
-        <div class="faq-item"><button class="faq-q" aria-expanded="false"><span>Can I book based on my doctor's prescription?</span><span class="ico"><i class="fa-solid fa-chevron-down"></i></span></button><div class="faq-a"><div class="faq-a-inner">Yes. Upload your prescription, provide your details and preferred collection time, and our team will review it and confirm the required tests before finalizing your booking.</div></div></div>
-        <div class="faq-item"><button class="faq-q" aria-expanded="false"><span>What payment methods do you accept?</span><span class="ico"><i class="fa-solid fa-chevron-down"></i></span></button><div class="faq-a"><div class="faq-a-inner">We accept UPI, credit/debit cards, net banking, and cash-on-collection for home visits. Payment details are confirmed at checkout.</div></div></div>
-    </div>
-</section>
-
-<!-- ========== CONTACT CTA ========== -->
-<section class="section">
-    <div class="contact-cta">
-        <span class="eyebrow">Get In Touch</span>
-        <h2>Have Questions?</h2>
-        <p>Our team is happy to help with bookings or reports</p>
-        <div class="contact-cta-buttons">
-            <a href="tel:+919853716027" class="btn btn-primary btn-lg" style="color:#ffffff !important;">
-                <i class="fa-solid fa-phone" aria-hidden="true" style="color:#ffffff !important;"></i>
-                <span style="color:#ffffff !important;">Call Now</span>
-            </a>
-            <a href="./contact/" class="btn btn-secondary btn-lg">
-                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                <span>Contact</span>
-            </a>
-        </div>
-        <p class="contact-cta-meta">
-            <i class="fa-solid fa-phone-volume" style="color:var(--primary);"></i> +91 98537 16027
-            &nbsp;•&nbsp;
-            <i class="fa-solid fa-envelope" style="color:var(--primary);"></i> info@luckydiagnosics.com
-        </p>
-    </div>
-</section>
-
 </main>
 
 <!-- ========== FOOTER ========== -->
 <footer class="site-footer">
     <div class="footer-brand">
-        <a href="./" class="logo">
-            <img src="images/logo.png" alt="" class="logo-img" onerror="this.style.display='none'">
+        <a href="../" class="logo">
+            <img src="../images/logo.png" alt="" class="logo-img" onerror="this.style.display='none'">
             <span class="logo-text"><strong>Lucky Diagnostics</strong><span>Trusted Diagnostics</span></span>
         </a>
         <p>Trusted diagnostic healthcare services in Bhubaneswar. Accurate tests, convenient home collection, and secure reports.</p>
@@ -333,15 +191,14 @@
     <div class="footer-grid">
         <div class="footer-col">
             <h5>Quick Links</h5>
-            <a href="./">Home</a><a href="./tests/">Tests</a><a href="./packages/">Packages</a>
-            <a href="./about/">About</a><a href="./contact/">Contact</a>
+            <a href="../">Home</a><a href="../tests/">Tests</a><a href="../packages/">Packages</a><a href="../about/">About</a><a href="../contact/">Contact</a>
         </div>
         <div class="footer-col">
     <h5>Quick Actions</h5>
     <a href="tel:+919853716027">Call to Book</a>
     <a href="https://wa.me/919853716027" target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
-    <a href="./uploadprescription/">Upload Prescription</a>
-    <a href="./contact/">Get Directions</a>
+    <a href="../uploadprescription/">Upload Prescription</a>
+    <a href="../contact/">Get Directions</a>
 </div>
         <div class="footer-col">
             <h5>Contact</h5>
@@ -351,7 +208,7 @@
         </div>
         <div class="footer-col">
             <h5>Legal</h5>
-            <a href="./privacy-policy/">Privacy Policy</a><a href="./terms/">Terms &amp; Conditions</a>
+            <a href="../privacy-policy/">Privacy Policy</a><a href="../terms/">Terms &amp; Conditions</a>
         </div>
     </div>
     <div class="footer-bottom">
@@ -363,42 +220,104 @@
 <!-- ========== BOTTOM NAV ========== -->
 <nav class="bottom-nav" aria-label="Primary mobile navigation">
     <ul>
-        <li><a href="./" class="active" aria-current="page"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
-        <li><a href="./tests/"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></a></li>
-        <li><a href="./packages/"><i class="fa-solid fa-box-open"></i><span>Packages</span></a></li>
+        <li><a href="../"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+        <li><a href="../tests/"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></a></li>
+        <li><a href="../packages/"><i class="fa-solid fa-box-open"></i><span>Packages</span></a></li>
         <li><a href="tel:+919853716027"><i class="fa-solid fa-phone"></i><span>Call to Book</span></a></li>
-        <li><a href="./about/"><i class="fa-solid fa-circle-info"></i><span>About Us</span></a></li>
+        <li><a href="../about/" aria-current="page"><i class="fa-solid fa-circle-info"></i><span>About Us</span></a></li>
     </ul>
 </nav>
 
-<!-- ===== PROMO SIDE AD (desktop only, once per session, after 5s) ===== -->
-<aside class="promo-ad" id="promoAd" aria-label="Special offer">
-    <button class="promo-close" id="promoClose" aria-label="Close offer">×</button>
-    <a href="./packages/" id="promoLink"><img id="promoImg" src="images/ad1.png" alt="Special offer"></a>
-</aside>
+<div class="toast-wrap" id="toastWrap"></div>
 
-<!-- ===== CALLBACK MODAL (desktop only, once per session, after 15s) ===== -->
-<div class="callback-modal" id="callbackModal" role="dialog" aria-label="Need help choosing a test?">
-    <div class="cb-box">
-        <button class="cb-close" id="cbClose" aria-label="Close">×</button>
-        <div class="cb-icon"><i class="fa-solid fa-headset"></i></div>
-        <h3>Not Sure Which Test to Book?</h3>
-        <p>Call us to find the right test or health package for your needs.</p>
-        <a class="btn btn-primary btn-lg cb-call" href="tel:+919853716027"><i class="fa-solid fa-phone"></i> +91 98537 16027</a>
-        <p class="cb-note">Free expert guidance • Mon–Sun 7 AM – 9 PM</p>
-    </div>
-</div>
+<script src="../js/config.js"></script><script src="../js/common.js"></script><script src="../js/api.js"></script><script src="../js/assistant.js"></script>
+<script>
+let fileData = null, fileName = '', mime = '';
 
-<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+function toggleAddress(show) {
+  document.getElementById('addressSec').style.display = show ? 'block' : 'none';
+}
 
-<script src="js/config.js"></script>
-<script src="js/common.js"></script>
-<script src="js/api.js"></script>
-<script src="js/cart.js"></script>
-<script src="js/home-cart.js"></script>   <!-- moved UP -->
-<script src="js/home.js"></script>
-<script src="js/home-lists.js"></script>
-<script src="js/assistant.js"></script>
-<script src="js/widgets.js"></script>
-</body>
-</html>
+file.addEventListener('change', () => {
+  const f = file.files[0]; 
+  if(!f) return;
+  if(f.size > 10 * 1024 * 1024) { 
+    if (typeof showToast === 'function') showToast('File too large (max 10MB)', 'error');
+    else alert('File too large (max 10MB)');
+    return; 
+  }
+  fileName = f.name; mime = f.type;
+  const rd = new FileReader();
+  rd.onload = () => { 
+    fileData = rd.result.split(',')[1]; 
+    fname.style.display = 'block'; 
+    fname.innerHTML = '<i class="fa-solid fa-check"></i> Selected: ' + (typeof escapeHtml === 'function' ? escapeHtml(f.name) : f.name); 
+  };
+  rd.readAsDataURL(f);
+});
+
+upBtn.onclick = async () => {
+  const name = document.getElementById('pName').value.trim();
+  const gender = document.getElementById('pGender').value;
+  const age = document.getElementById('pAge').value.trim();
+  const mobile = document.getElementById('pMobile').value.trim();
+  const email = document.getElementById('pEmail').value.trim();
+  const method = document.querySelector('input[name="method"]:checked').value;
+  const date = document.getElementById('pDate').value;
+  const time = document.getElementById('pTime').value;
+
+  // Form Validations
+  if (!name || !gender || !age || !mobile || !email || !date || !time) {
+    if (typeof showToast === 'function') showToast('Please fill all required fields', 'warning');
+    else alert('Please fill all required fields');
+    return;
+  }
+
+  let house = '', street = '', landmark = '', pincode = '';
+  if (method === 'Home Collection') {
+    house = document.getElementById('pHouse').value.trim();
+    street = document.getElementById('pStreet').value.trim();
+    landmark = document.getElementById('pLandmark').value.trim();
+    pincode = document.getElementById('pPincode').value.trim();
+
+    if (!pincode) {
+      if (typeof showToast === 'function') showToast('Please enter PIN Code for Home Collection', 'warning');
+      else alert('Please enter PIN Code for Home Collection');
+      return;
+    }
+  }
+
+  // Construct WhatsApp Message
+  let msg = `*New Booking & Prescription Request*\n\n`;
+  msg += `*Patient Details:*\n`;
+  msg += `• Name: ${name}\n`;
+  msg += `• Gender: ${gender}\n`;
+  msg += `• Age: ${age}\n`;
+  msg += `• Mobile: ${mobile}\n`;
+  msg += `• Email: ${email}\n\n`;
+
+  msg += `*Collection Details:*\n`;
+  msg += `• Method: ${method}\n`;
+
+  if (method === 'Home Collection') {
+    msg += `• Address: ${house ? house + ', ' : ''}${street ? street + ', ' : ''}${landmark ? 'Landmark: ' + landmark + ', ' : ''}PIN: ${pincode}\n`;
+  }
+
+  msg += `• Date: ${date}\n`;
+  msg += `• Time Slot: ${time}\n\n`;
+
+  if (fileData) {
+    msg += `*Prescription:* Attached / File selected (${fileName})\n`;
+    msg += `_(Note: If file doesn't attach automatically, please attach it directly in this chat)_`;
+  } else {
+    msg += `*Prescription:* None provided`;
+  }
+
+  const targetPhone = '919853716027';
+  const waUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(msg)}`;
+
+  // Open WhatsApp
+  window.open(waUrl, '_blank');
+};
+</script>
+</body></html>
