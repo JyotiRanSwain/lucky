@@ -1,0 +1,323 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Upload Prescription — Lucky Diagnostics</title>
+<meta name="description" content="Upload your doctor's prescription and we'll arrange your tests and sample collection.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/banner.css">
+<link rel="icon" type="image/png" href="../images/logo.png">
+<style>
+.up-wrap{max-width:620px;margin:0 auto;padding:16px;}
+.up-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;}
+.form-section-title{font-size:16px;font-weight:700;margin:18px 0 12px 0;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:6px;}
+.form-section-title:first-child{margin-top:0;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.up-card label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;margin-bottom:12px;}
+.up-card input,.up-card select,.up-card textarea{border:1.5px solid var(--border);border-radius:var(--radius);padding:10px 12px;font-size:14px;outline:none;background:#fff;}
+.up-card input:focus,.up-card select:focus,.up-card textarea:focus{border-color:var(--accent,#0056b3);}
+.radio-group{display:flex;gap:16px;align-items:center;padding:6px 0;}
+.radio-label{display:flex !important;flex-direction:row !important;align-items:center;gap:6px;font-weight:500 !important;cursor:pointer;}
+.radio-label input{margin:0;}
+.drop{border:2px dashed var(--accent);background:#fff;border-radius:var(--radius-lg);padding:20px;text-align:center;cursor:pointer;margin-bottom:12px;}
+.drop i{font-size:32px;color:var(--accent);}
+.drop strong{display:block;margin-top:6px;font-size:14px;}
+.drop span{font-size:12px;color:var(--muted);}
+.fname{background:var(--success-bg,#e6f4ea);color:var(--success,#137333);border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;margin-bottom:12px;display:none;}
+@media (max-width: 480px) {
+  .grid-2{grid-template-columns:1fr;}
+}
+</style></head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header" id="siteHeader">
+    <div class="header-inner">
+        <a href="../" class="logo" aria-label="Lucky Diagnostics Home">
+            <img src="../images/logo.png" alt="Lucky Diagnostics logo" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo-word" aria-hidden="true">
+                <span class="l1">Lucky</span>
+                <span class="l2">Diagnostics</span>
+            </span>
+        </a>
+
+        <div class="loc-selector" id="locSelector">
+            <button class="loc-drop" id="locDropBtn" aria-haspopup="listbox" aria-expanded="false">
+                <i class="fa-solid fa-location-dot pin"></i>
+                <span id="locCurrent"><span class="loc-short">Patia</span><span class="loc-long">, Bhubaneswar</span></span>
+                <i class="fa-solid fa-chevron-down chev"></i>
+            </button>
+            <div class="loc-menu" id="locMenu" role="listbox" aria-label="Select location">
+                <button class="loc-option active" data-loc="Patia, Bhubaneswar">
+                    <i class="fa-solid fa-location-dot"></i> Patia, Bhubaneswar
+                </button>
+                <button class="loc-option" data-loc="Cuttack" data-soon="1">
+                    <i class="fa-solid fa-location-dot"></i> Cuttack <span class="soon">SOON</span>
+                </button>
+            </div>
+        </div>
+
+        <nav class="nav-desktop" aria-label="Primary">
+            <a href="../">Home</a>
+            <a href="../tests/">Tests</a>
+            <a href="../packages/">Packages</a>
+            <a href="../about/">About</a>
+            <a href="../contact/">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="tel:+919853716027" class="icon-btn" aria-label="Call us"><i class="fa-solid fa-phone"></i></a>
+            <a href="../" class="icon-btn" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartBadge">0</span></a>
+            <button class="menu-toggle" id="menuBtn" aria-label="Open menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div>
+</header> 
+
+<!-- ========== MOBILE DRAWER ========== -->
+<nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <a href="../"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="../tests/"><i class="fa-solid fa-flask-vial"></i> Browse Tests</a>
+    <a href="../packages/"><i class="fa-solid fa-box-open"></i> Health Packages</a>
+    <a href="../tests/"><i class="fa-solid fa-house-medical"></i> Home Collection</a>
+    <a href="../uploadprescription/"><i class="fa-solid fa-prescription"></i> Upload Prescription</a>
+    <a href="../about/"><i class="fa-solid fa-circle-info"></i> About Us</a>
+    <a href="../contact/"><i class="fa-solid fa-envelope"></i> Contact</a>
+    <div class="drawer-actions">
+        <a href="tel:+919853716027" class="btn btn-secondary btn-block"><i class="fa-solid fa-phone"></i> Call +91 98537 16027</a>
+    </div>
+</nav>
+
+<main>
+<div class="page-head"><h1>Book Sample Collection & Upload Prescription</h1><p>Fill in your details to request booking via WhatsApp</p></div>
+<div class="up-wrap">
+  <div class="up-card">
+    
+    <!-- Patient Details -->
+    <div class="form-section-title">Patient Details</div>
+    <label>Patient Name *<input id="pName" placeholder="Full name" required></label>
+    
+    <div class="grid-2">
+      <label>Gender *
+        <select id="pGender" required>
+          <option value="">Select</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </label>
+      <label>Age *<input id="pAge" type="number" placeholder="e.g. 30" min="1" max="120" required></label>
+    </div>
+
+    <div class="grid-2">
+      <label>Mobile *<input id="pMobile" type="tel" placeholder="10-digit mobile number" required></label>
+      <label>Email *<input id="pEmail" type="email" placeholder="Your email address" required></label>
+    </div>
+
+    <!-- Collection Method -->
+    <div class="form-section-title">Collection Method</div>
+    <div class="radio-group">
+      <label class="radio-label">
+        <input type="radio" name="method" value="Home Collection" checked onclick="toggleAddress(true)"> Home Collection
+      </label>
+      <label class="radio-label">
+        <input type="radio" name="method" value="Visit Center" onclick="toggleAddress(false)"> Visit Center
+      </label>
+    </div>
+
+    <!-- Address Section -->
+    <div id="addressSec">
+      <div class="form-section-title">Address</div>
+      <div class="grid-2">
+        <label>House / Flat<input id="pHouse" placeholder="Flat No, House Name"></label>
+        <label>Street / Area<input id="pStreet" placeholder="Street, Sector, Area"></label>
+      </div>
+      <div class="grid-2">
+        <label>Landmark<input id="pLandmark" placeholder="Nearby landmark"></label>
+        <label>Pin Code *<input id="pPincode" type="text" placeholder="6-digit PIN code"></label>
+      </div>
+    </div>
+
+    <!-- Schedule -->
+    <div class="form-section-title">Schedule</div>
+    <div class="grid-2">
+      <label>Collection Date *<input id="pDate" type="date" required></label>
+      <label>Time Slot *
+        <select id="pTime" required>
+          <option value="">Select</option>
+          <option value="07:00 - 09:00">07:00 - 09:00</option>
+          <option value="09:00 - 11:00">09:00 - 11:00</option>
+          <option value="11:00 - 13:00">11:00 - 13:00</option>
+          <option value="13:00 - 15:00">13:00 - 15:00</option>
+          <option value="15:00 - 17:00">15:00 - 17:00</option>
+          <option value="17:00 - 19:00">17:00 - 19:00</option>
+        </select>
+      </label>
+    </div>
+
+    <!-- Prescription Upload (Optional) -->
+    <div class="form-section-title">Prescription (Optional)</div>
+    <label class="drop" for="file">
+      <i class="fa-solid fa-file-medical"></i>
+      <strong>Tap to upload prescription (Optional)</strong>
+      <span>PDF, JPG, PNG (max 10MB)</span>
+      <input type="file" id="file" accept=".pdf,.jpg,.jpeg,.png" hidden>
+    </label>
+    <div class="fname" id="fname"></div>
+
+    <button class="btn btn-accent btn-block btn-lg" id="upBtn" style="margin-top:10px;">
+      <i class="fa-brands fa-whatsapp"></i> Request Booking via WhatsApp
+    </button>
+    <p class="text-xs text-muted" style="text-align:center;margin-top:10px;">
+      <i class="fa-solid fa-shield-halved" style="color:var(--primary);"></i> Secure request. Your details will be sent directly via WhatsApp.
+    </p>
+  </div>
+</div>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+    <div class="footer-brand">
+        <a href="../" class="logo">
+            <img src="../images/logo.png" alt="" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo-text"><strong>Lucky Diagnostics</strong><span>Trusted Diagnostics</span></span>
+        </a>
+        <p>Trusted diagnostic healthcare services in Bhubaneswar. Accurate tests, convenient home collection, and secure reports.</p>
+        <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://wa.me/919853716027" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </div>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h5>Quick Links</h5>
+            <a href="../">Home</a><a href="../tests/">Tests</a><a href="../packages/">Packages</a><a href="../about/">About</a><a href="../contact/">Contact</a>
+        </div>
+        <div class="footer-col">
+    <h5>Quick Actions</h5>
+    <a href="tel:+919853716027">Call to Book</a>
+    <a href="https://wa.me/919853716027" target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
+    <a href="../uploadprescription/">Upload Prescription</a>
+    <a href="../contact/">Get Directions</a>
+</div>
+        <div class="footer-col">
+            <h5>Contact</h5>
+            <div class="contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+919853716027">+91 98537 16027</a></div>
+            <div class="contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:info@luckydiagnosics.com">info@luckydiagnosics.com</a></div>
+            <div class="contact-item"><i class="fa-solid fa-location-dot"></i><span>Patia, Bhubaneswar, Odisha</span></div>
+        </div>
+        <div class="footer-col">
+            <h5>Legal</h5>
+            <a href="../privacy-policy/">Privacy Policy</a><a href="../terms/">Terms &amp; Conditions</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div>© 2026 Lucky Diagnostics. All Rights Reserved.</div>
+        <div class="powered-by">Powered by <a href="https://powercloud.in/" target="_blank" rel="noopener noreferrer">PowerCloud</a></div>
+    </div>
+</footer>
+
+<!-- ========== BOTTOM NAV ========== -->
+<nav class="bottom-nav" aria-label="Primary mobile navigation">
+    <ul>
+        <li><a href="../"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+        <li><a href="../tests/"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></a></li>
+        <li><a href="../packages/"><i class="fa-solid fa-box-open"></i><span>Packages</span></a></li>
+        <li><a href="tel:+919853716027"><i class="fa-solid fa-phone"></i><span>Call to Book</span></a></li>
+        <li><a href="../about/" aria-current="page"><i class="fa-solid fa-circle-info"></i><span>About Us</span></a></li>
+    </ul>
+</nav>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="../js/config.js"></script><script src="../js/common.js"></script><script src="../js/api.js"></script><script src="../js/assistant.js"></script>
+<script>
+let fileData = null, fileName = '', mime = '';
+
+function toggleAddress(show) {
+  document.getElementById('addressSec').style.display = show ? 'block' : 'none';
+}
+
+file.addEventListener('change', () => {
+  const f = file.files[0]; 
+  if(!f) return;
+  if(f.size > 10 * 1024 * 1024) { 
+    if (typeof showToast === 'function') showToast('File too large (max 10MB)', 'error');
+    else alert('File too large (max 10MB)');
+    return; 
+  }
+  fileName = f.name; mime = f.type;
+  const rd = new FileReader();
+  rd.onload = () => { 
+    fileData = rd.result.split(',')[1]; 
+    fname.style.display = 'block'; 
+    fname.innerHTML = '<i class="fa-solid fa-check"></i> Selected: ' + (typeof escapeHtml === 'function' ? escapeHtml(f.name) : f.name); 
+  };
+  rd.readAsDataURL(f);
+});
+
+upBtn.onclick = async () => {
+  const name = document.getElementById('pName').value.trim();
+  const gender = document.getElementById('pGender').value;
+  const age = document.getElementById('pAge').value.trim();
+  const mobile = document.getElementById('pMobile').value.trim();
+  const email = document.getElementById('pEmail').value.trim();
+  const method = document.querySelector('input[name="method"]:checked').value;
+  const date = document.getElementById('pDate').value;
+  const time = document.getElementById('pTime').value;
+
+  // Form Validations
+  if (!name || !gender || !age || !mobile || !email || !date || !time) {
+    if (typeof showToast === 'function') showToast('Please fill all required fields', 'warning');
+    else alert('Please fill all required fields');
+    return;
+  }
+
+  let house = '', street = '', landmark = '', pincode = '';
+  if (method === 'Home Collection') {
+    house = document.getElementById('pHouse').value.trim();
+    street = document.getElementById('pStreet').value.trim();
+    landmark = document.getElementById('pLandmark').value.trim();
+    pincode = document.getElementById('pPincode').value.trim();
+
+    if (!pincode) {
+      if (typeof showToast === 'function') showToast('Please enter PIN Code for Home Collection', 'warning');
+      else alert('Please enter PIN Code for Home Collection');
+      return;
+    }
+  }
+
+  // Construct WhatsApp Message
+  let msg = `*New Booking & Prescription Request*\n\n`;
+  msg += `*Patient Details:*\n`;
+  msg += `• Name: ${name}\n`;
+  msg += `• Gender: ${gender}\n`;
+  msg += `• Age: ${age}\n`;
+  msg += `• Mobile: ${mobile}\n`;
+  msg += `• Email: ${email}\n\n`;
+
+  msg += `*Collection Details:*\n`;
+  msg += `• Method: ${method}\n`;
+
+  if (method === 'Home Collection') {
+    msg += `• Address: ${house ? house + ', ' : ''}${street ? street + ', ' : ''}${landmark ? 'Landmark: ' + landmark + ', ' : ''}PIN: ${pincode}\n`;
+  }
+
+  msg += `• Date: ${date}\n`;
+  msg += `• Time Slot: ${time}\n\n`;
+
+  if (fileData) {
+    msg += `*Prescription:* Attached / File selected (${fileName})\n`;
+    msg += `_(Note: If file doesn't attach automatically, please attach it directly in this chat)_`;
+  } else {
+    msg += `*Prescription:* None provided`;
+  }
+
+  const targetPhone = '919853716027';
+  const waUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(msg)}`;
+
+  // Open WhatsApp
+  window.open(waUrl, '_blank');
+};
+</script>
+</body></html>
