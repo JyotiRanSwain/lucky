@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Lucky Diagnostics</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="icon" type="image/png" href="../../images/logo.png">
+<link rel="stylesheet" href="../../css/admin.css?v=5">
+<style>
+.chk{flex-direction:row!important;align-items:center;gap:8px!important;}
+.testcheck-wrap{margin-bottom:12px;}
+.testcheck-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:180px;overflow-y:auto;border:1px solid var(--border);border-radius:8px;padding:10px;background:var(--surface-2);}
+.tc-item{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;cursor:pointer;}
+.tc-item input{width:16px;height:16px;accent-color:var(--primary);}  
+</style>
+</head>
+<body>
+
+<!-- Visible error banner (shows exact problem if JS fails) -->
+<div id="adminError" style="display:none;position:fixed;top:0;left:0;right:0;background:#fee2e2;color:#b91c1c;padding:10px 16px;font-size:13px;z-index:999;"></div>
+
+<div class="admin-layout">
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="brand">
+  <img src="../../images/logo.png" style="width:34px;height:34px;border-radius:8px;object-fit:contain;background:#fff;padding:3px;" onerror="this.style.display='none'" alt="">
+  Lucky Admin
+</div>
+    <a href="#dashboard" data-sec="dashboard" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+    <a href="#bookings" data-sec="bookings"><i class="fa-regular fa-calendar"></i> Bookings</a>
+    <a href="#customers" data-sec="customers"><i class="fa-solid fa-users"></i> Customers</a>
+    <a href="#tests" data-sec="tests"><i class="fa-solid fa-flask-vial"></i> Tests</a>
+    <a href="#packages" data-sec="packages"><i class="fa-solid fa-box-open"></i> Packages</a>
+    <a href="#categories" data-sec="categories"><i class="fa-solid fa-layer-group"></i> Categories</a>
+    <a href="#prescriptions" data-sec="prescriptions"><i class="fa-solid fa-prescription"></i> Prescriptions</a>
+    <a href="#collectors" data-sec="collectors"><i class="fa-solid fa-person"></i> Collectors</a>
+    <a href="#samples" data-sec="samples"><i class="fa-solid fa-vial"></i> Samples</a>
+    <a href="#technicians" data-sec="technicians"><i class="fa-solid fa-user-doctor"></i> Technicians</a>
+    <a href="#reports" data-sec="reports"><i class="fa-regular fa-file-lines"></i> Reports</a>
+    <a href="#articles" data-sec="articles"><i class="fa-solid fa-book-medical"></i> Articles</a>
+    <a href="#faqs" data-sec="faqs"><i class="fa-solid fa-circle-question"></i> FAQs</a>
+    <a href="../../index.html"><i class="fa-solid fa-arrow-left"></i> View Site</a>
+    <a href="#" id="adminLogout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <button class="admin-menu-btn" id="adminMenuBtn" type="button"><i class="fa-solid fa-bars"></i></button>
+      <h2 id="adminTitle">Dashboard</h2>
+      <button class="btn btn-primary btn-sm" id="adminAddBtn" type="button" style="display:none;"><i class="fa-solid fa-plus"></i> Add</button>
+    </div>
+    <div id="adminContent"><p style="padding:20px;color:#64748b;">Loading…</p></div>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="adminModal"><div class="modal" id="adminModalBody"></div></div>
+
+<script src="../../js/config.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/api.js"></script>
+<script src="../../js/admin.js?v=7"></script>
+</body>
+</html>
