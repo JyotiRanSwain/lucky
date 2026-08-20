@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Health Article — Lucky Diagnostics</title>
+<meta name="description" content="Evidence-based health and diagnostic testing articles.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/banner.css">
+<style>
+.article-wrap { max-width: 768px; margin: 0 auto; padding: 24px 16px; }
+.article-tag { display: inline-block; background: rgba(14, 165, 233, 0.1); color: var(--primary, #0ea5e9); font-weight: 600; font-size: 13px; padding: 4px 10px; border-radius: 20px; margin-bottom: 12px; }
+.article-wrap h1 { font-size: 26px; line-height: 1.3; margin-bottom: 12px; color: var(--text-1, #0f172a); }
+.article-wrap .meta { font-size: 13px; color: var(--muted, #64748b); margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
+.article-wrap p { font-size: 16px; line-height: 1.8; color: var(--text-2, #334155); margin-bottom: 18px; }
+.disc { background: var(--warning-bg, #fffbeb); border-left: 4px solid #f59e0b; border-radius: var(--radius, 8px); padding: 16px; font-size: 14px; color: var(--text-2, #334155); margin-top: 32px; display: flex; gap: 12px; align-items: flex-start; }
+.disc i { color: #f59e0b; font-size: 18px; margin-top: 2px; }
+</style>
+<link rel="icon" type="image/png" href="../images/logo.png">
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header" id="siteHeader">
+    <div class="header-inner">
+        <a href="../" class="logo" aria-label="Lucky Diagnostics Home">
+            <img src="../images/logo.png" alt="Lucky Diagnostics logo" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo-word" aria-hidden="true">
+                <span class="l1">Lucky</span>
+                <span class="l2">Diagnostics</span>
+            </span>
+        </a>
+
+        <div class="loc-selector" id="locSelector">
+            <button class="loc-drop" id="locDropBtn" aria-haspopup="listbox" aria-expanded="false">
+                <i class="fa-solid fa-location-dot pin"></i>
+                <span id="locCurrent"><span class="loc-short">Patia</span><span class="loc-long">, Bhubaneswar</span></span>
+                <i class="fa-solid fa-chevron-down chev"></i>
+            </button>
+            <div class="loc-menu" id="locMenu" role="listbox" aria-label="Select location">
+                <button class="loc-option active" data-loc="Patia, Bhubaneswar">
+                    <i class="fa-solid fa-location-dot"></i> Patia, Bhubaneswar
+                </button>
+                <button class="loc-option" data-loc="Cuttack" data-soon="1">
+                    <i class="fa-solid fa-location-dot"></i> Cuttack <span class="soon">SOON</span>
+                </button>
+            </div>
+        </div>
+
+        <nav class="nav-desktop" aria-label="Primary">
+            <a href="../">Home</a>
+            <a href="../tests/">Tests</a>
+            <a href="../packages/">Packages</a>
+            <a href="../about/">About</a>
+            <a href="../contact/">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="tel:+919853716027" class="icon-btn" aria-label="Call us"><i class="fa-solid fa-phone"></i></a>
+            <a href="../cart/" class="icon-btn" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartBadge">0</span></a>
+            <button class="menu-toggle" id="menuBtn" aria-label="Open menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div>
+</header> 
+
+<!-- ========== MOBILE DRAWER ========== -->
+<nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <a href="../"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="../tests/"><i class="fa-solid fa-flask-vial"></i> Browse Tests</a>
+    <a href="../packages/"><i class="fa-solid fa-box-open"></i> Health Packages</a>
+    <a href="../tests/"><i class="fa-solid fa-house-medical"></i> Home Collection</a>
+    <a href="../uploadprescription/"><i class="fa-solid fa-prescription"></i> Upload Prescription</a>
+    <a href="../about/"><i class="fa-solid fa-circle-info"></i> About Us</a>
+    <a href="../contact/"><i class="fa-solid fa-envelope"></i> Contact</a>
+    <div class="drawer-actions">
+        <a href="tel:+919853716027" class="btn btn-secondary btn-block"><i class="fa-solid fa-phone"></i> Call +91 98537 16027</a>
+    </div>
+</nav>
+
+<!-- ========== MAIN CONTENT ========== -->
+<main>
+    <article class="article-wrap" id="articleBody">
+        <p style="text-align:center; padding: 40px 0; color: var(--muted);"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading article...</p>
+    </article>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+    <div class="footer-brand">
+        <a href="../" class="logo">
+            <img src="../images/logo.png" alt="" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo-text"><strong>Lucky Diagnostics</strong><span>Trusted Diagnostics</span></span>
+        </a>
+        <p>Trusted diagnostic healthcare services in Bhubaneswar. Accurate tests, convenient home collection, and secure reports.</p>
+        <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://wa.me/919853716027" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </div>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h5>Quick Links</h5>
+            <a href="../">Home</a><a href="../tests/">Tests</a><a href="../packages/">Packages</a><a href="../about/">About</a><a href="../contact/">Contact</a>
+        </div>
+        <div class="footer-col">
+            <h5>Quick Actions</h5>
+            <a href="tel:+919853716027">Call to Book</a>
+            <a href="https://wa.me/919853716027" target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
+            <a href="../uploadprescription/">Upload Prescription</a>
+            <a href="../contact/">Get Directions</a>
+        </div>
+        <div class="footer-col">
+            <h5>Contact</h5>
+            <div class="contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+919853716027">+91 98537 16027</a></div>
+            <div class="contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:info@luckydiagnosics.com">info@luckydiagnosics.com</a></div>
+            <div class="contact-item"><i class="fa-solid fa-location-dot"></i><span>Patia, Bhubaneswar, Odisha</span></div>
+        </div>
+        <div class="footer-col">
+            <h5>Legal</h5>
+            <a href="../privacy-policy/">Privacy Policy</a><a href="../terms/">Terms &amp; Conditions</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div>© 2026 Lucky Diagnostics. All Rights Reserved.</div>
+        <div class="powered-by">Powered by <a href="https://powercloud.in/" target="_blank" rel="noopener noreferrer">PowerCloud</a></div>
+    </div>
+</footer>
+
+<!-- ========== BOTTOM NAV ========== -->
+<nav class="bottom-nav" aria-label="Primary mobile navigation">
+    <ul>
+        <li><a href="../"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+        <li><a href="../tests/"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></a></li>
+        <li><a href="../packages/"><i class="fa-solid fa-box-open"></i><span>Packages</span></a></li>
+        <li><a href="tel:+919853716027"><i class="fa-solid fa-phone"></i><span>Call to Book</span></a></li>
+        <li><a href="../about/"><i class="fa-solid fa-circle-info"></i><span>About Us</span></a></li>
+    </ul>
+</nav>
+
+<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+<!-- ========== SCRIPT INVOCATIONS ========== -->
+<script src="../js/config.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/assistant.js"></script>
+
+<script>
+const ARTICLES = {
+  'do-i-need-to-fast-before-blood-test': {
+    t: 'Do I Need to Fast Before a Blood Test?',
+    tag: 'Preparation',
+    r: '5 min',
+    p: [
+      'Fasting requirements depend on the specific test your doctor has ordered. Not every blood test needs fasting, so it is important to know which ones do.',
+      'Tests that commonly require fasting include the lipid profile (usually 10–12 hours) and fasting blood sugar (8–10 hours). Tests like CBC, thyroid profile and most vitamin tests generally do not require fasting.',
+      'During a fast you should avoid food, sugary drinks and alcohol. Water is almost always allowed and staying hydrated actually makes sample collection easier.',
+      'Always follow the specific instructions given by your doctor or the laboratory, because individual medical conditions can change the preparation needed.'
+    ]
+  },
+  'how-accurate-are-diagnostic-lab-tests': {
+    t: 'How Accurate Are Diagnostic Lab Tests?',
+    tag: 'Lab Tests',
+    r: '7 min',
+    p: [
+      'Modern laboratory tests are highly reliable when samples are collected correctly and processed under quality-controlled conditions.',
+      'Accuracy depends on several factors: proper sample collection, correct storage and transport, calibrated equipment, and trained technicians who follow validated procedures.',
+      'No test is perfect, and a single result is interpreted alongside your symptoms, history and sometimes repeat testing. This is why reports include reference ranges rather than a simple yes/no.',
+      'Choose a laboratory that follows strict quality control and reviews reports before release, and always discuss results with your physician.'
+    ]
+  },
+  'how-to-prepare-for-mri': {
+    t: 'How Should I Prepare for an MRI?',
+    tag: 'Imaging',
+    r: '6 min',
+    p: [
+      'An MRI is a painless imaging test that uses a strong magnetic field. Most MRI scans need little preparation.',
+      'Inform the facility about any metal implants, pacemakers, or pregnancy, because the magnetic field interacts with metal.',
+      'You may be asked to remove jewelry, watches, keys and metal accessories before the scan. For some scans a contrast agent is used, and the team will guide you.',
+      'The scan is loud but harmless; ear protection is provided. Stay still and follow the technician\'s instructions for the clearest images.'
+    ]
+  },
+  'vitamin-d-deficiency': {
+    t: 'Vitamin D Deficiency: Signs and Solutions',
+    tag: 'Vitamin',
+    r: '5 min',
+    p: [
+      'Vitamin D supports bone health, immunity and muscle function. Deficiency is common, especially with limited sun exposure.',
+      'Common signs include fatigue, bone or muscle aches and low mood, though many people have no obvious symptoms.',
+      'A simple blood test (Vitamin D Total) measures your level and helps your doctor decide whether supplementation is needed.',
+      'Sensible sun exposure, diet and supplements (only as advised by a doctor) help maintain healthy levels.'
+    ]
+  }
+};
+
+(async () => {
+  const slug = new URLSearchParams(window.location.search).get('slug');
+  let article = null;
+
+  if (typeof API !== 'undefined' && API.getArticle) {
+    try {
+      const res = await API.getArticle(slug);
+      if (res && res.success) article = res.data;
+    } catch (e) {
+      console.warn('API lookup failed, falling back to local articles', e);
+    }
+  }
+
+  if (!article) article = ARTICLES[slug];
+
+  const container = document.getElementById('articleBody');
+  if (!article) {
+    container.innerHTML = `
+      <h1>Article Not Found</h1>
+      <p>The health article you are looking for does not exist or has been moved.</p>
+      <a href="../" class="btn btn-primary" style="display:inline-block; margin-top:12px;">Back to Home</a>
+    `;
+    return;
+  }
+
+  const escapeHtml = str => String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+  const title = article.title || article.t;
+  const tag = article.tag || 'Guide';
+  const readTime = article.read_time || article.r || '5 min';
+  const paragraphs = article.content ? (Array.isArray(article.content) ? article.content : article.content.split('\n')) : article.p;
+
+  document.title = `${title} — Lucky Diagnostics`;
+
+  container.innerHTML = `
+    <span class="article-tag">${escapeHtml(tag)}</span>
+    <h1>${escapeHtml(title)}</h1>
+    <div class="meta">
+      <i class="fa-regular fa-clock"></i> ${escapeHtml(readTime)} read • Lucky Diagnostics
+    </div>
+    ${paragraphs.map(p => p ? `<p>${escapeHtml(p)}</p>` : '').join('')}
+    <div class="disc">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <div><strong>Medical Disclaimer:</strong> This article is for general information only and does not replace advice from a qualified healthcare professional.</div>
+    </div>
+  `;
+})();
+</script>
+</body>
+</html>
