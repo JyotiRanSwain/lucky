@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collector Dashboard — Lucky Diagnostics</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="icon" type="image/png" href="../images/logo.png">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+*{box-sizing:border-box;}
+body{background:#f8fafc;font-family:var(--font-body);margin:0;padding:0;padding-bottom:80px;}
+.collector-header{background:#fff;border-bottom:1px solid var(--border);padding:12px 16px;position:sticky;top:0;z-index:100;}
+.collector-header h2{font-size:16px;margin:0;}
+.collector-header .subtitle{font-size:12px;color:var(--muted);}
+.logout-btn{position:absolute;right:16px;top:12px;background:none;border:1px solid var(--border);border-radius:6px;padding:6px 12px;font-size:12px;cursor:pointer;}
+.filter-bar{background:#fff;padding:12px 16px;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center;}
+.filter-bar input[type="date"]{flex:1;padding:8px;border:1.5px solid var(--border);border-radius:6px;font-size:13px;}
+.filter-bar button{padding:8px 14px;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;}
+.filter-bar .btn-filter{background:var(--primary);color:#fff;}
+.filter-bar .btn-clear{background:var(--surface-2);color:var(--text);}
+.bookings-list{padding:12px;}
+.booking-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.booking-card .bk-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;}
+.booking-card .bk-id{font-family:monospace;font-size:13px;font-weight:700;color:var(--primary);}
+.booking-card .bk-status{font-size:10px;padding:3px 8px;border-radius:99px;font-weight:700;text-transform:uppercase;}
+.bk-status.pending{background:#fef3c7;color:#b45309;}
+.bk-status.assigned{background:#dbeafe;color:#1e40af;}
+.bk-status.collected{background:#dcfce7;color:#15803d;}
+.booking-card .patient-info{margin-bottom:12px;}
+.booking-card .patient-name{font-weight:700;font-size:15px;margin-bottom:4px;}
+.booking-card .patient-address{font-size:12px;color:var(--muted);line-height:1.4;}
+.booking-card .bk-actions{display:flex;gap:8px;}
+.booking-card .bk-actions button{flex:1;padding:10px;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;}
+.btn-call{background:#dcfce7;color:#15803d;}
+.btn-details{background:var(--primary);color:#fff;}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted);}
+.empty-state i{font-size:48px;margin-bottom:12px;opacity:.3;}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:none;align-items:flex-end;justify-content:center;}
+.modal-backdrop.open{display:flex;}
+.modal-content{background:#fff;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;border-radius:16px 16px 0 0;padding:20px;}
+.modal-close{position:absolute;top:12px;right:12px;background:var(--surface-2);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;}
+.modal-section{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.modal-section:last-child{border-bottom:none;}
+.modal-section h4{font-size:12px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.modal-grid .full{grid-column:1/-1;}
+.modal-grid .k{font-size:11px;color:var(--muted);text-transform:uppercase;}
+.modal-grid .v{font-weight:600;font-size:14px;}
+.btn-collect{width:100%;padding:14px;background:#15803d;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;margin-top:12px;}
+.btn-collect:disabled{opacity:.6;cursor:not-allowed;}
+.loading{text-align:center;padding:40px;color:var(--muted);}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 20px;border-radius:8px;font-size:13px;z-index:9999;display:none;}
+.toast.show{display:block;}
+.toast.success{background:#15803d;}
+.toast.error{background:#dc2626;}
+</style>
+</head>
+<body>
+
+<header class="collector-header">
+  <h2><i class="fa-solid fa-user-nurse" style="color:var(--primary);"></i> Collector Dashboard</h2>
+  <div class="subtitle" id="agentName">Loading...</div>
+  <button class="logout-btn" id="logoutBtn">Logout</button>
+</header>
+
+<div class="filter-bar">
+  <input type="date" id="filterDate" placeholder="Filter by date">
+  <button class="btn-filter" id="filterBtn">Filter</button>
+  <button class="btn-clear" id="clearBtn">Clear</button>
+</div>
+
+<div class="bookings-list" id="bookingsList">
+  <div class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading assignments...</div>
+</div>
+
+<div class="modal-backdrop" id="detailModal">
+  <div class="modal-content" id="modalBody" style="position:relative;"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/config.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/api.js"></script>
+<script>
+(function(){
+  var S = (typeof getSession === 'function') ? getSession() : null;
+  if (!S || S.role !== 'collector') { location.href = 'login.html'; return; }
+  
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = window.escapeHtml || function(s){ return String(s==null?'':s); };
+  
+  $('agentName').textContent = S.email || S.user_id;
+  
+  $('logoutBtn').addEventListener('click', function(){
+    if (typeof clearSession === 'function') clearSession();
+    location.href = 'login.html';
+  });
+  
+  function showToast(msg, type){
+    var t = $('toast');
+    t.textContent = msg;
+    t.className = 'toast show ' + (type || '');
+    setTimeout(function(){ t.className = 'toast'; }, 3000);
+  }
+  
+  function fmtDate(v){
+    if(!v) return '—';
+    var d = new Date(v);
+    if(isNaN(d)) return String(v).slice(0,10);
+    return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+  }
+  
+    function loadAssignments(dateFilter){
+    $('bookingsList').innerHTML = '<div class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</div>';
+    
+    var requestData = {};
+    if (dateFilter && dateFilter.trim() !== '') {
+      requestData.date = dateFilter;
+    }
+    
+    API.request('collectorAssignments', requestData).then(function(r){
+      console.log('[COLLECTOR] Filter:', dateFilter, 'Response:', r);
+      
+      if (!r || !r.success) {
+        $('bookingsList').innerHTML = '<div class="empty-state"><i class="fa-solid fa-circle-exclamation"></i><p>' + esc((r&&r.message)||'Failed to load') + '</p></div>';
+        return;
+      }
+      
+      var assignments = r.data || [];
+      
+      if (!assignments.length) {
+        var msg = dateFilter ? 'No assignments for ' + dateFilter : 'No assignments found';
+        $('bookingsList').innerHTML = '<div class="empty-state"><i class="fa-solid fa-calendar-xmark"></i><p>' + msg + '</p></div>';
+        return;
+      }
+      
+      var html = '';
+      assignments.forEach(function(a){
+        var b = a.booking || {};
+        var st = String(b.status || 'ASSIGNED').toLowerCase();
+        
+        html += '<div class="booking-card">' +
+          '<div class="bk-header">' +
+            '<span class="bk-id">' + esc(b.booking_id || '—') + '</span>' +
+            '<span class="bk-status ' + st + '">' + esc(b.status || 'Assigned') + '</span>' +
+          '</div>' +
+          '<div class="patient-info">' +
+            '<div class="patient-name">' + esc(b.patient_name || '—') + '</div>' +
+            '<div class="patient-address"><i class="fa-solid fa-location-dot"></i> ' + esc(b.address || 'No address') + '</div>' +
+            '<div class="patient-address" style="margin-top:4px;"><i class="fa-regular fa-calendar"></i> ' + fmtDate(b.collection_date) + ' | ' + esc(b.collection_time || '') + '</div>' +
+          '</div>' +
+          '<div class="bk-actions">' +
+            '<button class="btn-call" onclick="callPatient(\'' + jsEsc(b.patient_mobile || '') + '\')"><i class="fa-solid fa-phone"></i> Call</button>' +
+            '<button class="btn-details" onclick="showDetails(\'' + jsEsc(b.booking_id) + '\')"><i class="fa-solid fa-eye"></i> Details</button>' +
+          '</div>' +
+        '</div>';
+      });
+      
+      $('bookingsList').innerHTML = html;
+    });
+  }
+  
+  // Add this helper function at the top of the collector script
+  function jsEsc(s){
+    return String(s == null ? '' : s).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
+  }
+  
+  window.callPatient = function(mobile){
+    if (!mobile) { showToast('No mobile number', 'error'); return; }
+    window.location.href = 'tel:' + mobile;
+  };
+  
+  window.showDetails = function(bookingId){
+    API.request('collectorAssignments', {}, { _token: S.token }).then(function(r){
+      if (!r || !r.success) return;
+      var assignment = (r.data || []).find(function(a){ return a.booking && a.booking.booking_id === bookingId; });
+      if (!assignment) { showToast('Booking not found', 'error'); return; }
+      
+      var b = assignment.booking;
+      var st = String(b.status || 'ASSIGNED').toLowerCase();
+      var isCollected = st === 'collected' || st === 'sample_collected';
+      
+      var itemsSummary = b.items_summary || 'No items';
+      
+      var html = '<button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>' +
+        '<div class="modal-section">' +
+          '<h4>Booking Information</h4>' +
+          '<div class="modal-grid">' +
+            '<div><span class="k">Booking ID</span><span class="v">' + esc(b.booking_id) + '</span></div>' +
+            '<div><span class="k">Status</span><span class="v">' + esc(b.status) + '</span></div>' +
+            '<div><span class="k">Collection Date</span><span class="v">' + fmtDate(b.collection_date) + '</span></div>' +
+            '<div><span class="k">Time Slot</span><span class="v">' + esc(b.collection_time || '—') + '</span></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="modal-section">' +
+          '<h4>Patient Details</h4>' +
+          '<div class="modal-grid">' +
+            '<div><span class="k">Name</span><span class="v">' + esc(b.patient_name) + '</span></div>' +
+            '<div><span class="k">Age/Gender</span><span class="v">' + esc(b.patient_age || '') + ' / ' + esc(b.patient_gender || '') + '</span></div>' +
+            '<div><span class="k">Mobile</span><span class="v">' + esc(b.patient_mobile) + '</span></div>' +
+            '<div><span class="k">Email</span><span class="v">' + esc(b.patient_email || '—') + '</span></div>' +
+            '<div class="full"><span class="k">Address</span><span class="v">' + esc(b.address || '—') + '</span></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="modal-section">' +
+          '<h4>Items to Collect</h4>' +
+          '<div style="font-size:13px;line-height:1.6;">' + esc(itemsSummary) + '</div>' +
+        '</div>' +
+        '<div class="modal-section">' +
+          '<h4>Payment</h4>' +
+          '<div class="modal-grid">' +
+            '<div><span class="k">Subtotal</span><span class="v">₹' + esc(b.subtotal || 0) + '</span></div>' +
+            '<div><span class="k">Collection Fee</span><span class="v">₹' + esc(b.collection_fee || 0) + '</span></div>' +
+            '<div class="full"><span class="k">Total</span><span class="v" style="color:var(--primary);font-size:16px;">₹' + esc(b.total || 0) + '</span></div>' +
+          '</div>' +
+        '</div>';
+      
+      if (!isCollected) {
+        html += '<button class="btn-collect" id="collectBtn" onclick="markCollected(\'' + esc(b.booking_id) + '\')">' +
+          '<i class="fa-solid fa-check-circle"></i> Mark Sample as Collected</button>';
+      } else {
+        html += '<div style="text-align:center;padding:16px;background:#dcfce7;border-radius:8px;color:#15803d;font-weight:700;">' +
+          '<i class="fa-solid fa-circle-check"></i> Sample Already Collected</div>';
+      }
+      
+      $('modalBody').innerHTML = html;
+      $('detailModal').classList.add('open');
+    });
+  };
+  
+  window.closeModal = function(){
+    $('detailModal').classList.remove('open');
+  };
+  
+  window.markCollected = function(bookingId){
+    var btn = $('collectBtn');
+    if (!btn) return;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Updating...';
+    
+    API.request('collectorUpdate', {
+      booking_id: bookingId,
+      status: 'SAMPLE_COLLECTED',
+      sample_type: 'Blood',
+      remarks: ''
+    }, { _token: S.token }).then(function(r){
+      if (r && r.success) {
+        showToast('Sample marked as collected!', 'success');
+        closeModal();
+        loadAssignments($('filterDate').value);
+      } else {
+        showToast((r && r.message) || 'Failed to update', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Mark Sample as Collected';
+      }
+    });
+  };
+  
+    $('filterBtn').addEventListener('click', function(){
+    var dateVal = $('filterDate').value;
+    loadAssignments(dateVal || '');
+  });
+  
+  $('clearBtn').addEventListener('click', function(){
+    $('filterDate').value = '';
+    loadAssignments('');
+  });
+  
+  $('clearBtn').addEventListener('click', function(){
+    $('filterDate').value = '';
+    loadAssignments();
+  });
+  
+  $('detailModal').addEventListener('click', function(e){
+    if (e.target === $('detailModal')) closeModal();
+  });
+  
+  // Load on start
+    // Set default date to today
+  var today = new Date();
+  var todayStr = today.getFullYear() + '-' + 
+                 String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+                 String(today.getDate()).padStart(2, '0');
+  $('filterDate').value = todayStr;
+  
+  // Load today's assignments on start
+  loadAssignments(todayStr);
+})();
+  function jsEsc(s){
+    return String(s == null ? '' : s).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
+  }
+</script>
+</body>
+</html>
