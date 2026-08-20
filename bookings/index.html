@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Book — Lucky Diagnostics Bhubaneswar</title>
+<meta name="description" content="Book diagnostic tests and health packages online with home sample collection in Bhubaneswar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/banner.css">
+<link rel="stylesheet" href="../css/forms.css">
+<link rel="icon" type="image/png" href="../images/logo.png">
+<style>
+.book-wrap { max-width: 1100px; margin: 0 auto; padding: 20px 16px 100px; }
+.book-form-grid { display: flex; flex-direction: column; gap: 16px; }
+.item-card-section { order: 1; }
+.patient-details-section { order: 2; }
+.order-summary-section { order: 3; }
+.submit-btn-section { order: 4; }
+@media (min-width: 900px) {
+  .book-wrap { padding-bottom: 40px; }
+  .book-form-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: start; }
+  .left-col { display: flex; flex-direction: column; gap: 16px; }
+  .item-card-section { order: initial; }
+  .patient-details-section { order: initial; }
+  .order-summary-section { order: initial; grid-column: 2; grid-row: 1 / span 2; }
+  .submit-btn-section { order: initial; }
+}
+.book-card { background: var(--surface, #ffffff); border: 1px solid var(--border, #e2e8f0); border-radius: var(--radius-lg, 16px); padding: 20px; box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.04)); }
+.book-card h2 { font-size: 18px; font-weight: 700; color: var(--text-1, #0f172a); margin-bottom: 14px; }
+.book-card h3 { font-size: 13px; font-weight: 700; margin: 18px 0 10px; color: var(--muted, #64748b); text-transform: uppercase; letter-spacing: 0.05em; }
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.field label { font-size: 13px; font-weight: 600; color: var(--text-1, #0f172a); }
+.field input, .field select, .field textarea { border: 1.5px solid var(--border, #e2e8f0); border-radius: var(--radius, 8px); padding: 12px 14px; font-size: 14px; outline: none; font-family: inherit; background: #fff; transition: border-color 0.2s ease; }
+.field input:focus, .field select:focus { border-color: var(--primary, #0ea5e9); }
+.row2, .row3 { display: grid; grid-template-columns: 1fr; gap: 10px; }
+@media (min-width: 500px) { .row2 { grid-template-columns: 1fr 1fr; } .row3 { grid-template-columns: repeat(3, 1fr); } }
+.method-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.method-toggle label { border: 1.5px solid var(--border, #e2e8f0); border-radius: var(--radius, 10px); padding: 12px; text-align: center; cursor: pointer; font-weight: 600; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; }
+.method-toggle input { display: none; }
+.method-toggle input:checked + span { color: var(--primary, #0ea5e9); }
+.method-toggle label:has(input:checked) { border-color: var(--primary, #0ea5e9); background: rgba(14, 165, 233, 0.06); }
+.add-tests-wrapper { margin-top: 16px; border-top: 1px solid var(--border, #f1f5f9); padding-top: 14px; }
+.add-tests-btn { width: 100%; display: flex; justify-content: space-between; align-items: center; background: var(--surface-2, #f8fafc); border: 1.5px solid var(--border, #e2e8f0); border-radius: var(--radius, 8px); padding: 10px 14px; font-size: 14px; font-weight: 600; color: var(--text-1, #0f172a); cursor: pointer; }
+.add-tests-list { display: none; margin-top: 8px; border: 1px solid var(--border, #e2e8f0); border-radius: var(--radius, 8px); max-height: 200px; overflow-y: auto; background: #fff; padding: 8px 12px; }
+.add-tests-list.open { display: block; }
+.test-checkbox-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; cursor: pointer; }
+.test-checkbox-item:last-child { border-bottom: none; }
+.test-checkbox-item input[type="checkbox"] { width: 16px; height: 16px; margin-right: 8px; accent-color: var(--primary, #0ea5e9); }
+.summary { background: var(--surface-2, #f8fafc); border-radius: var(--radius, 10px); padding: 16px; margin-top: 12px; border: 1px solid var(--border, #e2e8f0); }
+.summary .line { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; color: var(--text-2, #475569); }
+.summary .line.total { border-top: 1px dashed var(--border, #cbd5e1); margin-top: 10px; padding-top: 10px; font-weight: 700; font-size: 17px; color: var(--text-1, #0f172a); }
+.includes-list { list-style: none; padding: 0; margin: 0; }
+.includes-list li { padding: 6px 0; font-size: 13px; display: flex; align-items: center; gap: 8px; color: var(--text-2, #475569); }
+.includes-list li i { color: var(--primary, #0ea5e9); }
+.item-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+.item-header h2 { margin: 0; }
+.item-header .price { font-size: 20px; font-weight: 800; color: var(--primary, #0ea5e9); }
+.item-header .old { font-size: 13px; color: var(--muted, #64748b); text-decoration: line-through; display: block; }
+.eyebrow { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--primary, #0ea5e9); background: rgba(14, 165, 233, 0.1); padding: 3px 8px; border-radius: 4px; margin-bottom: 6px; }
+.booking-success { padding: 30px 20px; text-align: center; }
+.booking-success .big { font-size: 56px; color: #16a34a; margin-bottom: 12px; }
+@media (min-width: 900px) { .sticky-summary { position: sticky; top: 90px; } }
+#submitBtn:disabled { opacity: 0.5 !important; cursor: not-allowed !important; pointer-events: none !important; }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+    <div class="header-inner">
+        <a href="../" class="logo" aria-label="Lucky Diagnostics Home">
+            <img src="../images/logo.png" alt="Lucky Diagnostics logo" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo-word" aria-hidden="true">
+                <span class="l1">Lucky</span>
+                <span class="l2">Diagnostics</span>
+            </span>
+        </a>
+        <div class="loc-selector" id="locSelector">
+            <button class="loc-drop" id="locDropBtn" aria-haspopup="listbox" aria-expanded="false">
+                <i class="fa-solid fa-location-dot pin"></i>
+                <span id="locCurrent"><span class="loc-short">Patia</span><span class="loc-long">, Bhubaneswar</span></span>
+                <i class="fa-solid fa-chevron-down chev"></i>
+            </button>
+            <div class="loc-menu" id="locMenu" role="listbox" aria-label="Select location">
+                <button class="loc-option active" data-loc="Patia, Bhubaneswar">
+                    <i class="fa-solid fa-location-dot"></i> Patia, Bhubaneswar
+                </button>
+                <button class="loc-option" data-loc="Cuttack" data-soon="1">
+                    <i class="fa-solid fa-location-dot"></i> Cuttack <span class="soon">SOON</span>
+                </button>
+            </div>
+        </div>
+        <nav class="nav-desktop" aria-label="Primary">
+            <a href="../">Home</a>
+            <a href="../tests/">Tests</a>
+            <a href="../packages/">Packages</a>
+            <a href="../about/">About</a>
+            <a href="../contact/">Contact</a>
+        </nav>
+        <div class="header-actions">
+            <a href="tel:+919853716027" class="icon-btn" aria-label="Call us"><i class="fa-solid fa-phone"></i></a>
+            <a href="../cart/" class="icon-btn" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartBadge">0</span></a>
+            <button class="menu-toggle" id="menuBtn" aria-label="Open menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div>
+</header>
+
+<nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <a href="../"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="../tests/"><i class="fa-solid fa-flask-vial"></i> Browse Tests</a>
+    <a href="../packages/"><i class="fa-solid fa-box-open"></i> Health Packages</a>
+    <a href="../tests/"><i class="fa-solid fa-house-medical"></i> Home Collection</a>
+    <a href="../uploadprescription/"><i class="fa-solid fa-prescription"></i> Upload Prescription</a>
+    <a href="../about/"><i class="fa-solid fa-circle-info"></i> About Us</a>
+    <a href="../contact/"><i class="fa-solid fa-envelope"></i> Contact</a>
+    <div class="drawer-actions">
+        <a href="tel:+919853716027" class="btn btn-secondary btn-block"><i class="fa-solid fa-phone"></i> Call +91 98537 16027</a>
+    </div>
+</nav>
+
+<main class="book-wrap">
+    <form class="book-form-grid" id="bookForm">
+        
+        <div class="left-col item-card-section">
+            <div class="book-card" id="itemCard">
+                <div class="item-header">
+                    <div>
+                        <span class="eyebrow" id="itemType">Diagnostic Test</span>
+                        <h2 id="itemName">Loading…</h2>
+                        <p id="itemDesc" style="color:var(--muted, #64748b);font-size:13px;margin-top:4px;"></p>
+                    </div>
+                    <div style="text-align:right;flex-shrink:0;">
+                        <span class="old" id="itemOld"></span>
+                        <span class="price" id="itemPrice"></span>
+                    </div>
+                </div>
+                <div id="itemIncludes" style="display:none;">
+                    <h3>Includes</h3>
+                    <ul class="includes-list" id="includesList"></ul>
+                </div>
+
+                <div class="add-tests-wrapper" id="addTestsWrapper">
+                    <button type="button" class="add-tests-btn" id="toggleTestsBtn">
+                        <span><i class="fa-solid fa-plus-circle"></i> Add Additional Tests</span>
+                        <i class="fa-solid fa-chevron-down" id="toggleTestsIcon"></i>
+                    </button>
+                    <div class="add-tests-list" id="additionalTestsList"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="left-col patient-details-section">
+            <div class="book-card">
+                <h2>Patient Details</h2>
+                <div class="field">
+                    <label>Patient Name *</label>
+                    <input name="patient_name" type="text" required pattern="[A-Za-z\s]{2,50}" title="Only letters and spaces allowed" placeholder="Enter full name" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
+                </div>
+                <div class="row3">
+                    <div class="field">
+                        <label>Gender *</label>
+                        <select name="gender" required>
+                            <option value="">Select</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Age *</label>
+                        <input name="age" type="number" min="1" max="120" required placeholder="Years" oninput="if(this.value < 0) this.value = ''; if(this.value > 120) this.value = 120;">
+                    </div>
+                    <div class="field">
+                        <label>Mobile *</label>
+                        <input name="mobile" type="tel" maxlength="10" required pattern="[6-9][0-9]{9}" title="Enter valid 10-digit mobile number starting with 6-9" placeholder="10-digit number" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Email *</label>
+                    <input name="email" type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="For receiving reports">
+                </div>
+
+                <h3>Collection Method</h3>
+                <div class="method-toggle">
+                    <label>
+                        <input type="radio" name="collection_method" value="HOME" checked>
+                        <span><i class="fa-solid fa-house"></i> Home Collection</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="collection_method" value="CENTER">
+                        <span><i class="fa-solid fa-building"></i> Visit Center</span>
+                    </label>
+                </div>
+
+                <div id="homeFields">
+                    <h3>Address</h3>
+                    <div class="row2">
+                        <div class="field"><label>House / Flat</label><input name="house" placeholder="Apt, Building, Fl No."></div>
+                        <div class="field"><label>Street / Area</label><input name="street" placeholder="Street, Colony, Area"></div>
+                    </div>
+                    <div class="row2">
+                        <div class="field"><label>Landmark</label><input name="landmark" placeholder="Near hospital, park, etc."></div>
+                        <div class="field"><label>Pin Code *</label><input name="pin" pattern="[0-9]{6}" maxlength="6" placeholder="6-digit PIN" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6)"></div>
+                    </div>
+                </div>
+
+                <h3>Schedule</h3>
+                <div class="row2">
+                    <div class="field">
+                        <label>Collection Date *</label>
+                        <input name="collection_date" type="date" required>
+                    </div>
+                    <div class="field">
+                        <label>Time Slot *</label>
+                        <select name="collection_time" required>
+                            <option value="">Select Slot</option>
+                            <option>07:00 - 09:00</option>
+                            <option>09:00 - 11:00</option>
+                            <option>11:00 - 13:00</option>
+                            <option>13:00 - 15:00</option>
+                            <option>15:00 - 17:00</option>
+                            <option>17:00 - 19:00</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <aside class="order-summary-section">
+            <div class="book-card sticky-summary">
+                <h2>Order Summary</h2>
+                <div class="summary">
+                    <div id="summaryItems">
+                        <div class="line"><span id="sumName">—</span><span id="sumPrice">₹0</span></div>
+                    </div>
+                    <div class="line" id="sumFeeLine" style="display:none;">
+                        <span>Home Collection Fee</span>
+                        <span id="sumFee">₹100</span>
+                    </div>
+                    <div class="promo-box" style="margin: 12px 0; border-top: 1px dashed var(--border, #cbd5e1); padding-top: 12px; width: 100%; box-sizing: border-box;">
+                        <div style="display: flex; gap: 6px; width: 100%; align-items: center;">
+                            <input type="text" id="promoInput" placeholder="Enter Promo Code" style="flex: 1; min-width: 0; padding: 8px 10px; font-size: 13px; border: 1.5px solid var(--border, #e2e8f0); border-radius: 6px; text-transform: uppercase;">
+                            <button type="button" id="applyPromoBtn" class="btn btn-primary" style="flex-shrink: 0; padding: 8px 12px; font-size: 13px; border-radius: 6px; white-space: nowrap;">Apply</button>
+                        </div>
+                        <div id="promoMsg" style="font-size: 12px; margin-top: 6px; display: none;"></div>
+                    </div>
+                    <div class="line" id="sumDiscountLine" style="display:none; color: #16a34a; font-weight: 600;">
+                        <span>Discount (<span id="promoTag"></span>)</span>
+                        <span id="sumDiscount">-₹0</span>
+                    </div>
+                    <div class="line total">
+                        <span>Total Payable</span>
+                        <span id="sumTotal">₹0</span>
+                    </div>
+                </div>
+                <p style="font-size:12px;color:var(--muted, #64748b);margin-top:12px;line-height:1.5;">
+                    <i class="fa-solid fa-shield-halved" style="color:var(--primary, #0ea5e9);"></i> 
+                    After booking, you will receive a confirmation email with your booking ID.
+                </p>
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="submitBtn" disabled style="padding:14px;font-size:16px;font-weight:700;margin-top:16px;width:100%;">
+                    <i class="fa-solid fa-calendar-check"></i> Confirm Booking
+                </button>
+            </div>
+        </aside>
+
+    </form>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+    <div class="footer-brand">
+        <a href="../" class="logo">
+            <img src="../images/logo.png" alt="" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo-text"><strong>Lucky Diagnostics</strong><span>Trusted Diagnostics</span></span>
+        </a>
+        <p>Trusted diagnostic healthcare services in Bhubaneswar. Accurate tests, convenient home collection, and secure reports.</p>
+        <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://wa.me/919853716027" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </div>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h5>Quick Links</h5>
+            <a href="../">Home</a><a href="../tests/">Tests</a><a href="../packages/">Packages</a><a href="../about/">About</a><a href="../contact/">Contact</a>
+        </div>
+        <div class="footer-col">
+    <h5>Quick Actions</h5>
+    <a href="tel:+919853716027">Call to Book</a>
+    <a href="https://wa.me/919853716027" target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
+    <a href="../UploadPrescription/">Upload Prescription</a>
+    <a href="../contact/">Get Directions</a>
+</div>
+        <div class="footer-col">
+            <h5>Contact</h5>
+            <div class="contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+919853716027">+91 98537 16027</a></div>
+            <div class="contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:info@luckydiagnosics.com">info@luckydiagnosics.com</a></div>
+            <div class="contact-item"><i class="fa-solid fa-location-dot"></i><span>Patia, Bhubaneswar, Odisha</span></div>
+        </div>
+        <div class="footer-col">
+            <h5>Legal</h5>
+            <a href="../privacy-policy/">Privacy Policy</a><a href="../terms/">Terms &amp; Conditions</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div>© 2026 Lucky Diagnostics. All Rights Reserved.</div>
+        <div class="powered-by">Powered by <a href="https://powercloud.in/" target="_blank" rel="noopener noreferrer">PowerCloud</a></div>
+    </div>
+</footer>
+
+<!-- ========== BOTTOM NAV ========== -->
+<nav class="bottom-nav" aria-label="Primary mobile navigation">
+    <ul>
+        <li><a href="../"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+        <li><a href="../tests/"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></a></li>
+        <li><a href="../packages/"><i class="fa-solid fa-box-open"></i><span>Packages</span></a></li>
+        <li><a href="tel:+919853716027"><i class="fa-solid fa-phone"></i><span>Call to Book</span></a></li>
+        <li><a href="../about/"><i class="fa-solid fa-circle-info"></i><span>About Us</span></a></li>
+    </ul>
+</nav>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="../js/config.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/assistant.js"></script>
+<script>
+(function(){
+  const dateInput = document.querySelector('input[name="collection_date"]');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+  }
+
+  const params = new URLSearchParams(location.search);
+  const type = params.get('type');
+  const slug = params.get('slug');
+  const fromCart = params.get('from') === 'cart';
+  const fmt = window.formatPrice || (n => '₹' + n);
+  
+  const $ = id => document.getElementById(id);
+  const escapeHtml = window.escapeHtml || (s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'));
+
+  let item = null;
+  let allAvailableTests = [];
+  let selectedAddons = new Map();
+  let appliedPromo = null;
+  let cartItems = (typeof Cart !== 'undefined' && fromCart) ? Cart.get() : [];
+
+    function getBaseItems(){
+    if (fromCart) {
+      return cartItems.map(i => ({ id: i.id, type: i.type || 'test', name: i.name, price: parseFloat(i.price)||0, includes: i.includes || '' }));
+    }
+    if (!item) return [];
+    const basePrice = type === 'package' ? (item.offer_price || item.original_price) : (item.discount_price || item.price);
+    return [{ id: (type==='test' ? item.test_id : item.package_id), type, name: item.name, price: basePrice, includes: '' }];
+  }
+
+  async function load(){
+    try {
+      if (typeof API === 'undefined') { $('itemName').textContent = 'Configuration Error'; updateTotal(); return; }
+
+      if (fromCart) {
+        if (!cartItems.length) {
+          $('itemName').textContent = 'Your cart is empty';
+          $('itemDesc').innerHTML = '<a href="../tests/" style="color:var(--primary);">Browse tests</a> to add items.';
+          const addWrap = $('addTestsWrapper'); if (addWrap) addWrap.style.display = 'none';
+          updateTotal(); return;
+        }
+        $('itemType').textContent = 'Cart Booking (' + cartItems.length + ' items)';
+        $('itemName').textContent = cartItems.map(i => i.name).join(', ');
+        $('itemPrice').textContent = fmt(Cart.total());
+        const addWrap = $('addTestsWrapper'); if (addWrap) addWrap.style.display = 'none';
+        updateTotal(); return;
+      }
+
+      const r = type === 'package' ? await API.getPackage(slug) : await API.getTest(slug);
+      if (!r || !r.success || !r.data) {
+        $('itemName').textContent = 'Item not found';
+        $('itemDesc').textContent = r && r.message ? r.message : 'Not found';
+        if (typeof showToast === 'function') showToast(r.message || 'Not found', 'error');
+        updateTotal(); return;
+      }
+      
+      item = r.data;
+      $('itemName').textContent = item.name;
+      $('itemDesc').textContent = item.description || '';
+      $('itemType').textContent = type === 'package' ? 'Health Package' : 'Diagnostic Test';
+      const price = type === 'package' ? (item.offer_price || item.original_price) : (item.discount_price || item.price);
+      const oldPrice = type === 'package' ? item.original_price : item.price;
+      $('itemPrice').textContent = fmt(price);
+      if (oldPrice > price) $('itemOld').textContent = fmt(oldPrice);
+      $('sumName').textContent = item.name;
+      $('sumPrice').textContent = fmt(price);
+
+      if (type === 'package' && item.test_ids && item.test_ids.length) {
+        const testsR = await API.getTests();
+        if (testsR.success && testsR.data) {
+          const byId = {};
+          testsR.data.forEach(t => byId[t.test_id] = t);
+          const included = item.test_ids.map(id => byId[id]).filter(Boolean);
+          $('includesList').innerHTML = included.map(t => `<li><i class="fa-solid fa-circle-check"></i> ${escapeHtml(t.name)}</li>`).join('');
+          $('itemIncludes').style.display = 'block';
+        }
+      }
+
+      const extraR = await API.getTests();
+      if (extraR && extraR.success && extraR.data) {
+        const currentId = type === 'test' ? item.test_id : null;
+        allAvailableTests = extraR.data.filter(t => t.test_id !== currentId);
+        renderAddonList();
+      }
+      updateTotal();
+    } catch (err) {
+      $('itemName').textContent = 'Error loading item';
+      if (typeof showToast === 'function') showToast('Failed: ' + err.message, 'error');
+      updateTotal();
+    }
+  }
+
+  function renderAddonList() {
+    const container = $('additionalTestsList');
+    if (!allAvailableTests.length) { container.innerHTML = '<p style="font-size:12px;color:#64748b;">No extra tests available.</p>'; return; }
+    container.innerHTML = allAvailableTests.map(t => {
+      const p = t.discount_price || t.price;
+      return `<label class="test-checkbox-item"><div><input type="checkbox" class="addon-cb" data-id="${t.test_id}" data-name="${escapeHtml(t.name)}" data-price="${p}"><span>${escapeHtml(t.name)}</span></div><b>${fmt(p)}</b></label>`;
+    }).join('');
+    container.querySelectorAll('.addon-cb').forEach(cb => {
+      cb.addEventListener('change', (e) => {
+        const id = e.target.dataset.id;
+        if (e.target.checked) selectedAddons.set(id, { id: id, name: e.target.dataset.name, price: parseFloat(e.target.dataset.price) });
+        else selectedAddons.delete(id);
+        updateTotal();
+      });
+    });
+  }
+
+  if ($('toggleTestsBtn')) {
+    $('toggleTestsBtn').addEventListener('click', () => {
+      const list = $('additionalTestsList'); const icon = $('toggleTestsIcon');
+      list.classList.toggle('open'); icon.classList.toggle('fa-chevron-up'); icon.classList.toggle('fa-chevron-down');
+    });
+  }
+
+  if ($('applyPromoBtn')) {
+    $('applyPromoBtn').addEventListener('click', async (e) => {
+      e.preventDefault();
+      const promoInput = $('promoInput');
+      const msgEl = $('promoMsg');
+      const mobileInput = document.querySelector('input[name="mobile"]');
+      const emailInput = document.querySelector('input[name="email"]');
+      const promoCode = promoInput ? promoInput.value.trim() : '';
+      const mobile = mobileInput ? mobileInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+      msgEl.style.display = 'block';
+      if (!mobile || !email) { msgEl.style.color = '#dc2626'; msgEl.textContent = 'Please enter Mobile and Email first.'; return; }
+      if (!promoCode) { msgEl.style.color = '#dc2626'; msgEl.textContent = 'Please enter a promo code.'; return; }
+      const btn = $('applyPromoBtn');
+      btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+      msgEl.style.color = '#0ea5e9'; msgEl.textContent = 'Validating...';
+
+      const baseItems = getBaseItems();
+      let subtotal = baseItems.reduce((s, it) => s + it.price, 0);
+      if (!fromCart) selectedAddons.forEach(a => subtotal += a.price);
+
+      try {
+        const res = await API.validatePromo({ promo_code: promoCode, mobile: mobile, email: email, subtotal: subtotal });
+        if (res && res.success) {
+          appliedPromo = res; msgEl.style.color = '#16a34a'; msgEl.textContent = res.message || 'Applied!';
+          promoInput.disabled = true; btn.innerHTML = '<i class="fa-solid fa-check"></i> Applied';
+        } else {
+          appliedPromo = null; msgEl.style.color = '#dc2626'; msgEl.textContent = res ? res.message : 'Invalid';
+          btn.disabled = false; btn.textContent = 'Apply';
+        }
+      } catch (err) {
+        appliedPromo = null; msgEl.style.color = '#dc2626'; msgEl.textContent = 'Error: ' + err.message;
+        btn.disabled = false; btn.textContent = 'Apply';
+      }
+      updateTotal();
+    });
+  }
+
+  function updateTotal(){
+    const submitBtn = $('submitBtn');
+    const baseItems = getBaseItems();
+    if (!baseItems.length) { $('sumTotal').textContent = fmt(0); if (submitBtn) submitBtn.disabled = true; return; }
+    let summaryHtml = ''; let baseTotal = 0;
+        baseItems.forEach(it => {
+      baseTotal += it.price;
+      summaryHtml += `<div class="line"><span>${escapeHtml(it.name)}</span><span>${fmt(it.price)}</span></div>`;
+      if (it.type === 'package' && it.includes) {
+        summaryHtml += `<div style="font-size:11px;color:var(--muted);padding:0 0 6px 8px;line-height:1.5;">↳ ${escapeHtml(it.includes)}</div>`;
+      }
+    });
+    let addonTotal = 0;
+    if (!fromCart) {
+      selectedAddons.forEach((addon) => { addonTotal += addon.price; summaryHtml += `<div class="line"><span>${escapeHtml(addon.name)}</span><span>${fmt(addon.price)}</span></div>`; });
+    }
+    $('summaryItems').innerHTML = summaryHtml;
+    const checkedRadio = document.querySelector('input[name="collection_method"]:checked');
+    const method = checkedRadio ? checkedRadio.value : 'HOME';
+    const fee = method === 'HOME' ? ((window.APP_CONFIG && window.APP_CONFIG.COLLECTION_FEE) || 100) : 0;
+    $('sumFeeLine').style.display = method === 'HOME' ? 'flex' : 'none';
+    $('sumFee').textContent = fmt(fee);
+    const subtotal = baseTotal + addonTotal;
+    let discountAmount = 0;
+    if (appliedPromo) {
+      if (appliedPromo.discount_type === 'percentage') discountAmount = Math.round((subtotal * appliedPromo.discount_value) / 100);
+      else discountAmount = appliedPromo.discount_amount || 0;
+      if ($('sumDiscountLine')) $('sumDiscountLine').style.display = 'flex';
+      if ($('promoTag')) $('promoTag').textContent = appliedPromo.promo_code;
+      if ($('sumDiscount')) $('sumDiscount').textContent = '-' + fmt(discountAmount);
+    } else {
+      if ($('sumDiscountLine')) $('sumDiscountLine').style.display = 'none';
+    }
+    const grandTotal = Math.max(0, subtotal + fee - discountAmount);
+    $('sumTotal').textContent = fmt(grandTotal);
+    if (submitBtn) submitBtn.disabled = grandTotal <= 0;
+  }
+
+  document.querySelectorAll('input[name="collection_method"]').forEach(r => {
+    r.addEventListener('change', () => { $('homeFields').style.display = r.value === 'HOME' && r.checked ? 'block' : 'none'; updateTotal(); });
+  });
+
+  $('bookForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = $('submitBtn');
+    const baseItems = getBaseItems();
+    if (!baseItems.length) { if (typeof showToast === 'function') showToast('No items to book', 'error'); return; }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Booking...';
+    const fd = new FormData(e.target);
+
+    // ===== FIXED: Build items from base (single OR cart) + addons =====
+    const bookingItems = baseItems.map(it => ({ 
+      type: it.type, 
+      id: it.id, 
+      name: it.name,
+      price: it.price,
+      quantity: 1 
+    }));
+    
+    if (!fromCart) {
+      selectedAddons.forEach((addon) => {
+        bookingItems.push({ type: 'test', id: addon.id, name: addon.name, price: addon.price, quantity: 1 });
+      });
+    }
+    // ===== END FIX =====
+
+    let subtotal = 0;
+    bookingItems.forEach(it => subtotal += it.price * it.quantity);
+    
+    const method = document.querySelector('input[name="collection_method"]:checked').value;
+    const fee = method === 'HOME' ? ((window.APP_CONFIG && window.APP_CONFIG.COLLECTION_FEE) || 100) : 0;
+    
+    let discount = 0;
+    if (appliedPromo) {
+      if (appliedPromo.discount_type === 'percentage') discount = Math.round((subtotal * appliedPromo.discount_value) / 100);
+      else discount = appliedPromo.discount_amount || 0;
+    }
+    
+    const total = subtotal - discount + fee;
+
+    const data = {
+      items: bookingItems,
+      patient_name: fd.get('patient_name'),
+      patient_gender: fd.get('gender'),
+      patient_age: fd.get('age'),
+      patient_mobile: fd.get('mobile'),
+      patient_email: fd.get('email'),
+      collection_method: fd.get('collection_method'),
+      collection_date: fd.get('collection_date'),
+      collection_time: fd.get('collection_time'),
+      promo_code: appliedPromo ? appliedPromo.promo_code : null,
+      address: [fd.get('house'), fd.get('street'), fd.get('landmark'), fd.get('pin') ? 'PIN ' + fd.get('pin') : ''].filter(Boolean).join(', '),
+      subtotal: subtotal,
+      discount: discount,
+      collection_fee: fee,
+      tax: 0,
+      total: total
+    };
+
+    console.log('[BOOKING] Sending:', JSON.stringify(data, null, 2));
+    
+    try {
+      const r = await API.createBooking(data);
+      if (r.success) {
+        if (fromCart && typeof Cart !== 'undefined') Cart.clear();
+        document.querySelector('main').innerHTML = `
+          <div class="book-card booking-success">
+            <div class="big"><i class="fa-solid fa-circle-check"></i></div>
+            <h2>Booking Confirmed!</h2>
+            <p style="margin:8px 0;">Booking ID: <b style="color:var(--primary, #0ea5e9);">${r.booking_id}</b></p>
+            <p>Confirmation email sent to <b>${escapeHtml(fd.get('email'))}</b></p>
+            <p style="margin-top:8px;">Total Amount: <b>${fmt(r.total)}</b></p>
+            <a href="../" class="btn btn-primary" style="margin-top:16px;display:inline-block;">Back to Home</a>
+          </div>`;
+      } else {
+        if (typeof showToast === 'function') showToast(r.message || 'Booking failed', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-calendar-check"></i> Confirm Booking';
+      }
+    } catch (err) {
+      if (typeof showToast === 'function') showToast('Booking failed: ' + err.message, 'error');
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-calendar-check"></i> Confirm Booking';
+    }
+  });
+
+  load();
+})();
+</script>
+</body>
+</html>
