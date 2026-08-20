@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — Lucky Diagnostics</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/admin.css">
+<link rel="icon" type="image/png" href="../images/logo.png">
+<style>.spin{display:inline-block;width:14px;height:14px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:6px;}@keyframes sp{to{transform:rotate(360deg)}}.brand-logo{width:56px;height:56px;object-fit:contain;margin:0 auto 10px;display:block;}</style>
+</head>
+<body class="admin-auth">
+<div class="auth-card">
+  <img src="../images/logo.png" class="brand-logo" onerror="this.style.display='none'" alt="Lucky Diagnostics">
+  <h1>Admin Panel</h1>
+  <p>Lucky Diagnostics</p>
+  <form id="loginForm">
+    <label>Email<input type="email" id="aEmail" required placeholder="admin@luckydiagnosics.com"></label>
+    <label>Password<input type="password" id="aPass" required placeholder="••••••••"></label>
+    <button class="btn btn-primary btn-block" id="loginBtn" type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+  </form>
+</div>
+<div class="toast-wrap" id="toastWrap"></div>
+<script src="../js/config.js"></script><script src="../js/common.js"></script><script src="../js/api.js"></script>
+<script>
+document.getElementById('loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = document.getElementById('loginBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> Authenticating...';
+
+  // Clear any old sessions
+  if (typeof clearSession === 'function') clearSession();
+
+  const r = await API.request('adminLogin', { email: aEmail.value, password: aPass.value });
+  
+  if (r.success && r.session) {
+    setSession(r.session);
+    
+    // DEBUG: Verify session was saved
+    const saved = getSession();
+    console.log('Login successful. Session saved:', saved);
+    console.log('Session role:', saved ? saved.role : 'NULL');
+    
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Success! Redirecting...';
+    setTimeout(() => { 
+      location.href = './dashboard?session=' + encodeURIComponent(JSON.stringify(r.session)); 
+    }, 500);
+  } else {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Login';
+    showToast(r.message || 'Invalid credentials', 'error');
+  }
+});
+</script>
+</body></html>
