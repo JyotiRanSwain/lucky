@@ -1,12 +1,16 @@
 User-agent: *
 Allow: /
+Allow: /about/
+Allow: /contact/
+Allow: /packages/
+Allow: /tests/
+
+# Block Admin, User Utilities, and Private Routes
 Disallow: /admin/
 Disallow: /collector/
-Disallow: /technician/
-Disallow: /pages/profile.html
-Disallow: /pages/bookings.html
-Disallow: /pages/reports.html
-Disallow: /pages/cart.html
-Disallow: /apps-script/
+Disallow: /cart/
+Disallow: /bookings/
+Disallow: /uploadprescription/
+Disallow: /data/
 
 Sitemap: https://luckydiagnostics.com/sitemap.xml

@@ -13,10 +13,10 @@ const APP_CONFIG = {
     SESSION_MAX_AGE: 24 * 60 * 60 * 1000,  // 24 hours
 
     /* ---- BUSINESS ---- */
-    PHONE: "+91 98537 16027",
-    PHONE_TEL: "+919853716027",
-    EMAIL: "info@luckydiagnosics.com",
-    LOCATION: "Patia, Bhubaneswar, Odisha 751024",
+    PHONE: "+91 99371 93790",
+    PHONE_TEL: "+919937193790",
+    EMAIL: "info@luckydiagnostics.com",
+    LOCATION: "Plot No 838, Jagannath Temple Road, beside Maa Durga Medical Hall, Kanan Vihar, Patia, Bhubaneswar, Odisha 751031 751024",
 
     /* ---- COLLECTION ---- */
     COLLECTION_FEE: 100,

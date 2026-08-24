@@ -2,9 +2,9 @@
 
 A modern, responsive, SEO-friendly diagnostic healthcare web application.
 
-**Location:** Patia, Bhubaneswar, Odisha, India
-**Phone:** +91 98537 16027
-**Email:** info@luckydiagnosics.com
+**Location:** Plot No 838, Jagannath Temple Road, beside Maa Durga Medical Hall, Kanan Vihar, Patia, Bhubaneswar, Odisha 751031, India
+**Phone:** +91 99371 93790
+**Email:** info@luckydiagnostics.com
 
 ## Tech Stack
 - **Frontend:** HTML5, CSS3, Vanilla JavaScript
