@@ -146,4 +146,27 @@
     createBooking: d => request('createBooking', d),
     clearCache: () => CATALOG.forEach(a => lsDel(a))
   };
+  /* Pre-warm the Apps Script so cold-starts never hit the user */
+(function prewarm() {
+  if (typeof APP_CONFIG === 'undefined' || !APP_CONFIG.API_URL) return;
+  const img = new Image();
+  img.src = APP_CONFIG.API_URL + '?user_content_key=warm&t=' + Date.now();
+})();
+
+/* Offline / Online banner */
+(function offlineBanner() {
+  let banner = null;
+  function show() {
+    if (banner) return;
+    banner = document.createElement('div');
+    banner.id = 'offlineBanner';
+    banner.innerHTML = '<i class="fa-solid fa-wifi"></i> You are offline — showing cached data. <button id="offlineRetry">Retry</button>';
+    document.body.appendChild(banner);
+    document.getElementById('offlineRetry').onclick = () => { if (navigator.onLine) hide(); else location.reload(); };
+  }
+  function hide() { if (banner) { banner.remove(); banner = null; } }
+  window.addEventListener('online', hide);
+  window.addEventListener('offline', show);
+  if (!navigator.onLine) show();
+})();
 })();

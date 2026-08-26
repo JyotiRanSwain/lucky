@@ -69,9 +69,14 @@ document.addEventListener('click', function (e) {
   if (Cart.add(item)) {
     if (typeof showToast === 'function') showToast('Added to cart: ' + item.name, 'success');
     const orig = btn.innerHTML;
+    btn.classList.add('pulse');
     btn.innerHTML = '<i class="fa-solid fa-check"></i> Added';
     btn.disabled = true;
-    setTimeout(() => { btn.innerHTML = orig; btn.disabled = false; }, 1500);
+    setTimeout(() => {
+      btn.innerHTML = orig;
+      btn.disabled = false;
+      btn.classList.remove('pulse');
+    }, 1500);
   } else {
     if (typeof showToast === 'function') showToast('Already in cart', 'error');
   }

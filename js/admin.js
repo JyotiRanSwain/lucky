@@ -19,7 +19,16 @@
   var $=function(id){return document.getElementById(id);};
   var content=$('adminContent'),title=$('adminTitle'),addBtn=$('adminAddBtn'),sidebar=$('adminSidebar'),modal=$('adminModal'),modalBody=$('adminModalBody');
   $('adminMenuBtn').onclick=function(){sidebar.classList.toggle('open');};
-  $('adminLogout').onclick=function(e){e.preventDefault();API.request('logout',{});clearSession();window.location.href='/admin/';};
+  $('adminLogout').onclick=function(e){
+  e.preventDefault();
+  API.request('logout',{});
+  clearSession();
+  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({ type: 'BUST' });
+  }
+  try { localStorage.clear(); } catch(e){}
+  window.location.href='/admin/';
+};
   modal.addEventListener('click',function(e){if(e.target===modal)modal.classList.remove('open');});
   function api(a,d){return API.request(a,Object.assign({},d||{},{_token:S.token}));}
   function toast(r){notify(r&&r.success?'Saved successfully':(r&&r.message)||'Failed',r&&r.success?'success':'error');}

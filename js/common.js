@@ -1,22 +1,16 @@
 /* ============================================================
-   LUCKY DIAGNOSTICS — js/common.js (CLEAN - single session source)
+   LUCKY DIAGNOSTICS — js/common.js
    ============================================================ */
 
 window.siteRoot = function () {
     const path = location.pathname;
-
-    // Local files: subfolder pages need ../
     if (location.protocol === 'file:') {
         return /\/(pages|tests|packages|categories|health-guide|locations|admin|collector|technician)\//.test(path) ? '../' : '';
     }
-
-    // GitHub Pages: /repo-name/
     if (location.hostname.endsWith('.github.io')) {
         const seg = path.split('/').filter(Boolean)[0];
         return seg ? '/' + seg + '/' : '/';
     }
-
-    // Production / localhost
     return '/';
 };
 
@@ -30,60 +24,46 @@ window.debounce = function (fn, delay) {
     let t; return function (...a) { clearTimeout(t); t = setTimeout(() => fn.apply(this, a), delay || 300); };
 };
 
+/* ========== TOAST (upgraded with icons + fade-out) ========== */
 window.showToast = function (message, type, duration) {
-    type = type || 'info'; duration = duration || 3500;
+    type = type || 'success';
+    duration = duration || 2800;
     const wrap = document.getElementById('toastWrap');
     if (!wrap) { alert(message); return; }
+    const icon = type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-check';
     const t = document.createElement('div');
     t.className = 'toast ' + type;
-    t.innerHTML = '<span>' + escapeHtml(message) + '</span>';
+    t.innerHTML = '<i class="fa-solid ' + icon + '"></i><span>' + escapeHtml(message) + '</span>';
     wrap.appendChild(t);
-    setTimeout(() => t.remove(), duration);
+    setTimeout(() => {
+        t.style.opacity = '0';
+        t.style.transform = 'translateX(120%)';
+        setTimeout(() => t.remove(), 300);
+    }, duration);
 };
 
-/* ========== SESSION (single definition, localStorage only) ========== */
+/* ========== SESSION ========== */
 window.setSession = function (s) {
     try {
         localStorage.setItem(APP_CONFIG.SESSION_KEY, JSON.stringify(Object.assign({}, s, { created_at: Date.now() })));
-        console.log('[Session] Saved:', s.role, s.token);
-    } catch (e) {
-        console.error('[Session] Save failed:', e);
-    }
+    } catch (e) { console.error('[Session] Save failed:', e); }
 };
-
 window.getSession = function () {
     try {
         const raw = localStorage.getItem(APP_CONFIG.SESSION_KEY);
         if (!raw) return null;
         const s = JSON.parse(raw);
-        if (Date.now() - s.created_at > APP_CONFIG.SESSION_MAX_AGE) {
-            window.clearSession();
-            return null;
-        }
+        if (Date.now() - s.created_at > APP_CONFIG.SESSION_MAX_AGE) { window.clearSession(); return null; }
         return s;
     } catch (e) { return null; }
 };
-
 window.clearSession = function () {
     try { localStorage.removeItem(APP_CONFIG.SESSION_KEY); } catch (e) {}
 };
-
 window.requireAuth = function () {
-
-    if (getSession()) {
-        return true;
-    }
-
-    const currentPath =
-        location.pathname + location.search;
-
-    const loginPath = '/admin/';
-
-    location.href =
-        loginPath +
-        '?next=' +
-        encodeURIComponent(currentPath);
-
+    if (getSession()) return true;
+    const currentPath = location.pathname + location.search;
+    location.href = '/admin/?next=' + encodeURIComponent(currentPath);
     return false;
 };
 
@@ -103,9 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
     /* Mobile menu */
     const menuBtn = document.getElementById('menuBtn');
     const drawer = document.getElementById('mobileDrawer');
-    if (menuBtn && drawer) {
-        menuBtn.addEventListener('click', () => drawer.classList.toggle('open'));
-    }
+    if (menuBtn && drawer) menuBtn.addEventListener('click', () => drawer.classList.toggle('open'));
 
     /* ---------- LOCATION DROPDOWN ---------- */
     (function () {
@@ -156,5 +134,12 @@ document.addEventListener('DOMContentLoaded', function () {
         document.addEventListener('click', (e) => { if (!sel.contains(e.target)) close(); });
     })();
 });
+
+/* ========== SERVICE WORKER REGISTRATION ========== */
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+}
 
 console.log('%cLucky Diagnostics', 'color:#0d9488;font-size:18px;font-weight:800;');
