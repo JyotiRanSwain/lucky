@@ -77,7 +77,8 @@
       '<input type="date" id="filterDateFrom" value="'+filterDateFrom+'" style="padding:8px;border:1.5px solid var(--border);border-radius:6px;">'+
       '<input type="date" id="filterDateTo" value="'+filterDateTo+'" style="padding:8px;border:1.5px solid var(--border);border-radius:6px;">'+
       '<button class="btn btn-primary" onclick="A.applyFilters()">Filter</button>'+
-      '<button class="btn btn-secondary" onclick="A.clearFilters()">Clear</button></div>';
+      '<button class="btn btn-secondary" onclick="A.clearFilters()">Clear</button>'+
+      '<button class="btn btn-secondary" onclick="A.refreshBookings()" title="Reload from server"><i class="fa-solid fa-rotate"></i> Refresh</button></div>';
 
     var rows=pageData.map(function(b){
       var st=String(b.status||'PENDING').toLowerCase();
@@ -107,7 +108,14 @@
     if(totalPages>1){pag='<div style="display:flex;gap:6px;justify-content:center;margin-top:16px;">';for(var i=1;i<=totalPages;i++){pag+='<button class="btn '+(i===currentPage?'btn-primary':'btn-secondary')+'" onclick="A.goToPage('+i+')">'+i+'</button>';}pag+='</div>';}
 
     content.innerHTML=filterHtml+'<div class="admin-table-wrap"><table class="admin-table bookings-table"><thead><tr><th>Booking ID</th><th>Patient Details</th><th>Items</th><th>Collection</th><th>Date</th><th>Time</th><th>Booked On</th><th style="text-align:right">Action</th></tr></thead><tbody>'+(rows||'<tr><td colspan="8">No records yet</td></tr>')+'</tbody></table></div>'+pag;
-    setTimeout(function(){var si=document.getElementById('searchInput');if(si)si.addEventListener('keypress',function(e){if(e.key==='Enter')A.applyFilters();});},100);
+        setTimeout(function(){
+      var si=document.getElementById('searchInput');
+      if(si){
+        si.addEventListener('keypress',function(e){if(e.key==='Enter')A.applyFilters();});
+        var t=null;
+        si.addEventListener('input',function(){clearTimeout(t);t=setTimeout(function(){searchQuery=si.value;currentPage=1;bookingsTable(lastData);},250);});
+      }
+    },100);
   }
 
   function bookingDetails(id){
@@ -323,9 +331,10 @@
     del:function(sec,i){var cfg=CFG[sec];var id=(lastData[i]||{})[cfg.id];if(!id||!confirm('Delete this record?'))return;api('adminDelete',{sheet:cfg.sheet,idField:cfg.id,id:id}).then(function(r){toast(r);route(current);});},
     details:bookingDetails,
     closeModal:function(){modal.classList.remove('open');},
-    applyFilters:function(){searchQuery=document.getElementById('searchInput').value;filterDateFrom=document.getElementById('filterDateFrom').value;filterDateTo=document.getElementById('filterDateTo').value;currentPage=1;route('bookings');},
-    clearFilters:function(){searchQuery='';filterDateFrom='';filterDateTo='';currentPage=1;route('bookings');},
-    goToPage:function(p){currentPage=p;route('bookings');}
+    applyFilters:function(){searchQuery=document.getElementById('searchInput').value;filterDateFrom=document.getElementById('filterDateFrom').value;filterDateTo=document.getElementById('filterDateTo').value;currentPage=1;bookingsTable(lastData);},
+    clearFilters:function(){searchQuery='';filterDateFrom='';filterDateTo='';currentPage=1;bookingsTable(lastData);},
+    goToPage:function(p){currentPage=p;bookingsTable(lastData);},
+    refreshBookings:function(){route('bookings');},
   };
 
   function route(sec){

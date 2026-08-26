@@ -1153,5 +1153,5 @@
        ============================================ */
 
     init();
-
+    window.addEventListener('ld:updated', function () { init(); });   // ← ADD THIS
 })();
