@@ -1,5 +1,5 @@
 /* Lucky Diagnostics — Service Worker v1 */
-const CACHE = 'ld-v2';
+const CACHE = 'ld-v3';
 const CATALOG_KEY_PREFIX = 'getTests|getPackages|getCategories|getLocations|getArticles|getFaqs';
 
 self.addEventListener('install', e => {
