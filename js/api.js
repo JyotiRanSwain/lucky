@@ -123,15 +123,18 @@
     } catch (e) {
       // TIMEOUT RECOVERY: the server may have finished anyway — verify before showing an error
       if (isBooking && data && (data.patient_mobile || data.patient_email)) {
-        try {
-          const chk = await post('checkLastBooking', {
-            patient_mobile: data.patient_mobile || '',
-            patient_email: data.patient_email || ''
-          }, 25000);
-          if (chk && chk.success && chk.booking_id) {
-            return { success: true, booking_id: chk.booking_id, total: chk.total, recovered: true };
-          }
-        } catch (e2) {}
+        for (let i = 0; i < 3; i++) {
+          try {
+            const chk = await post('checkLastBooking', {
+              patient_mobile: data.patient_mobile || '',
+              patient_email: data.patient_email || ''
+            }, 20000);
+            if (chk && chk.success && chk.booking_id) {
+              return { success: true, booking_id: chk.booking_id, total: chk.total, recovered: true };
+            }
+          } catch (e2) {}
+          await wait(2500);
+        }
       }
       return { success: false, message: 'Network error. Please try again.' };
     }
