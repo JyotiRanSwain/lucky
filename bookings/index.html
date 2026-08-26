@@ -334,10 +334,74 @@
 <script>
 (function(){
   const dateInput = document.querySelector('input[name="collection_date"]');
-  if (dateInput) {
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.setAttribute('min', today);
+  const timeSelect = document.querySelector('select[name="collection_time"]');
+
+  function updateTimeSlots() {
+    if (!dateInput || !timeSelect) return;
+    const selectedDateStr = dateInput.value;
+    const now = new Date();
+    
+    // Format Local Date YYYY-MM-DD
+    const todayY = now.getFullYear();
+    const todayM = String(now.getMonth() + 1).padStart(2, '0');
+    const todayD = String(now.getDate()).padStart(2, '0');
+    const todayStr = `${todayY}-${todayM}-${todayD}`;
+
+    const currentHour = now.getHours();
+
+    Array.from(timeSelect.options).forEach(opt => {
+      const text = opt.text || opt.value;
+      if (!text || text.includes('Select Slot')) {
+        opt.style.display = '';
+        opt.disabled = false;
+        return;
+      }
+
+      // Check if chosen date is strictly today or in the past
+      if (selectedDateStr && selectedDateStr < todayStr) {
+        // Hide all slots if past date selected
+        opt.style.display = 'none';
+        opt.disabled = true;
+      } else if (selectedDateStr === todayStr) {
+        // Parse start hour from "HH:MM - HH:MM"
+        const startHour = parseInt(text.split(':')[0], 10);
+        if (!isNaN(startHour) && startHour <= currentHour) {
+          opt.style.display = 'none';
+          opt.disabled = true;
+        } else {
+          opt.style.display = '';
+          opt.disabled = false;
+        }
+      } else {
+        // Future date selected: keep all available
+        opt.style.display = '';
+        opt.disabled = false;
+      }
+    });
+
+    // Reset selection if current selected option got hidden
+    if (timeSelect.selectedOptions[0] && timeSelect.selectedOptions[0].disabled) {
+      timeSelect.value = '';
+    }
   }
+
+  if (dateInput) {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const localTodayStr = `${yyyy}-${mm}-${dd}`;
+    
+    dateInput.setAttribute('min', localTodayStr);
+    dateInput.addEventListener('change', updateTimeSlots);
+  }
+
+  if (timeSelect) {
+    timeSelect.addEventListener('focus', updateTimeSlots);
+  }
+
+  // Initial execution to handle pre-filled values
+  updateTimeSlots();
 
   const params = new URLSearchParams(location.search);
   const type = params.get('type');
