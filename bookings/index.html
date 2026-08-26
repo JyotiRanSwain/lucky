@@ -592,16 +592,30 @@
     
     try {
       const r = await API.createBooking(data);
-      if (r.success) {
+            if (r.success) {
         if (fromCart && typeof Cart !== 'undefined') Cart.clear();
-        document.querySelector('main').innerHTML = `
+
+        const email = fd.get('email');
+        const hasId = r.booking_id && String(r.booking_id) !== 'undefined' && String(r.booking_id) !== 'null';
+        const showTotal = (r.total != null && !isNaN(r.total) && Number(r.total) > 0) ? Number(r.total) : total;
+
+        document.querySelector('main').innerHTML = hasId ? `
           <div class="book-card booking-success">
             <div class="big"><i class="fa-solid fa-circle-check"></i></div>
             <h2>Booking Confirmed!</h2>
             <p style="margin:8px 0;">Booking ID: <b style="color:var(--primary, #0ea5e9);">${r.booking_id}</b></p>
-            <p>Confirmation email sent to <b>${escapeHtml(fd.get('email'))}</b></p>
-            <p style="margin-top:8px;">Total Amount: <b>${fmt(r.total)}</b></p>
-            <a href="../" class="btn btn-primary" style="margin-top:16px;display:inline-block;">Back to Home</a>
+            <p>Confirmation email sent to <b>${escapeHtml(email)}</b></p>
+            <p style="margin-top:8px;">Total Amount: <b>${fmt(showTotal)}</b></p>
+            <a href="../index.html" class="btn btn-primary" style="margin-top:16px;display:inline-block;">Back to Home</a>
+          </div>` : `
+          <div class="book-card booking-success">
+            <div class="big"><i class="fa-solid fa-envelope-circle-check"></i></div>
+            <h2>Booking Received!</h2>
+            <p style="margin:8px 0;">Your booking is confirmed ✅</p>
+            <p>Your <b>Booking ID</b> and receipt have been sent to <b>${escapeHtml(email)}</b>.<br>
+               <span style="font-size:12px;color:var(--muted,#64748b);">Please check your inbox (and spam folder) in a minute.</span></p>
+            <p style="margin-top:8px;">Total Amount: <b>${fmt(showTotal)}</b></p>
+            <a href="../index.html" class="btn btn-primary" style="margin-top:16px;display:inline-block;">Back to Home</a>
           </div>`;
       } else {
         if (typeof showToast === 'function') showToast(r.message || 'Booking failed', 'error');
