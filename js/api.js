@@ -114,10 +114,27 @@
   }
 
   /* ---------- main request ---------- */
-  async function request(action, data) {
+    async function request(action, data) {
     if (CATALOG.includes(action)) return catalog(action);
-    try { return await post(action, data || {}, 60000); }   // mutating calls: single attempt, long timeout (no double-booking risk)
-    catch (e) { return { success: false, message: 'Network error. Please try again.' }; }
+    const isBooking = (action === 'createBooking');
+    try {
+      // Give bookings up to 2 minutes (emails are slow on cold starts)
+      return await post(action, data || {}, isBooking ? 120000 : 60000);
+    } catch (e) {
+      // TIMEOUT RECOVERY: the server may have finished anyway — verify before showing an error
+      if (isBooking && data && (data.patient_mobile || data.patient_email)) {
+        try {
+          const chk = await post('checkLastBooking', {
+            patient_mobile: data.patient_mobile || '',
+            patient_email: data.patient_email || ''
+          }, 25000);
+          if (chk && chk.success && chk.booking_id) {
+            return { success: true, booking_id: chk.booking_id, total: chk.total, recovered: true };
+          }
+        } catch (e2) {}
+      }
+      return { success: false, message: 'Network error. Please try again.' };
+    }
   }
 
   const norm = d => (typeof d === 'string') ? { slug: d } : (d || {});
